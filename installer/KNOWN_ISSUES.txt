@@ -1,0 +1,56 @@
+PatternTester - Problemi noti
+===============================
+
+Aggiornato per la versione 1.0.0.
+
+
+1. Scaling DPI diverso dal 100% (Windows)
+------------------------------------------
+Su alcuni setup con scaling del monitor diverso da 100% (es. 125%,
+150%), il pattern a schermo intero puo' risultare leggermente piu'
+grande o piu' piccolo dello schermo fisico, con conseguente taglio di
+una parte del contenuto sui bordi (es. contorno del pattern
+"Geometria" incompleto).
+Causa nota: Avalonia usa pixel logici (DIP) per Window.Width/Height,
+mentre le informazioni sullo schermo sono in pixel fisici; senza una
+conversione esplicita i due valori non coincidono a scaling diversi
+dal 100%.
+Da verificare/confermare su hardware con scaling non standard prima
+del prossimo rilascio.
+
+
+2. Profondita' colore per canale (bit per pixel) su Windows
+--------------------------------------------------------------
+Nella finestra "Info Monitor", il campo "Profondita' colore pannello"
+(bit per canale, bpc) risulta non disponibile ("N/D") su Windows.
+Su Linux questo dato e' ottenuto da xrandr --verbose; su Windows
+richiederebbe il parsing manuale dei dati EDID grezzi del monitor, non
+esposto dalle API Win32 standard senza librerie/driver aggiuntivi.
+Non pianificato per il prossimo rilascio, priorita' bassa.
+
+
+3. Refresh rate: corrispondenza nome dispositivo
+----------------------------------------------------
+Il refresh rate letto su Windows si appoggia al nome dispositivo
+riportato da Avalonia per ciascuno schermo (es. \\.\DISPLAY1). In rari
+casi, su configurazioni hardware non standard, questo nome potrebbe
+non corrispondere esattamente a quanto atteso dalle API Win32,
+risultando in un valore "N/D" anche quando il refresh rate reale e'
+noto al sistema operativo. E' presente un meccanismo di fallback per
+indice, ma non e' garantito al 100% su ogni configurazione.
+
+
+4. Collaudo su Linux (LMDE 7)
+---------------------------------
+Le modifiche piu' recenti relative a tema chiaro/scuro, finestra
+Impostazioni a schede e uniformita' tipografica sono state validate
+soprattutto su Windows. Un passaggio di collaudo dedicato su LMDE 7
+(o distribuzioni Linux equivalenti) e' consigliato prima di
+considerare la parita' tra le due piattaforme completa.
+
+
+5. Pacchettizzazione/installer
+----------------------------------
+Lo script di build e l'installer Windows (Inno Setup) sono stati
+predisposti ma non ancora sottoposti a un collaudo end-to-end completo
+di installazione/disinstallazione su una macchina pulita.

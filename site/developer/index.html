@@ -1,0 +1,1541 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Professional Monitor Test Pattern Generator">
+      
+      
+        <meta name="author" content="DataSoft Srl">
+      
+      
+      
+        <link rel="prev" href="../user/">
+      
+      
+        <link rel="next" href="../architecture/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Developer Guide - PatternTester</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#developer-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="PatternTester" class="md-header__button md-logo" aria-label="PatternTester" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PatternTester
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Developer Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../user/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Developer Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../architecture/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../windows/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Platforms
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../patterns/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Patterns
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../api/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../faq/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  FAQ
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../changelog/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Changelog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PatternTester" class="md-nav__button md-logo" aria-label="PatternTester" data-md-component="logo">
+      
+  <img src="../assets/images/logo.png" alt="logo">
+
+    </a>
+    PatternTester
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platforms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Platforms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Patterns
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Patterns
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pattern Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FAQ
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frequently Asked Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Changelog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="developer-guide">Developer Guide<a class="headerlink" href="#developer-guide" title="Permanent link">&para;</a></h1>
+<p>This guide describes the internal structure of PatternTester and how to work on it.</p>
+<hr />
+<h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>.NET SDK</strong> — exact version pinned in <a href="https://github.com/datasoftsrl/PatternTester/blob/main/global.json"><code>global.json</code></a> (<code>rollForward: latestFeature</code>, so any compatible newer feature release also works)</li>
+<li><strong>Avalonia UI</strong> 12.x (via NuGet, restored automatically)</li>
+<li><strong>Git</strong></li>
+<li>An editor: Visual Studio Community, VS Code + C# Dev Kit, or JetBrains Rider all work; the project has no editor-specific files</li>
+<li>On Windows, for the installer only: <a href="https://jrsoftware.org/isdl.php">Inno Setup</a> (free)</li>
+</ul>
+<p>PatternTester targets <code>net10.0</code>, plain (not <code>net10.0-windows</code>), so the solution builds and runs on both Windows and Linux from the same codebase.</p>
+<hr />
+<h1 id="repository-layout">Repository Layout<a class="headerlink" href="#repository-layout" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>src/
+  PatternTester.App/            Avalonia UI application (entry point)
+  PatternTester.Core/           Pattern definitions, models, pattern catalog
+  PatternTester.Infrastructure/ Configuration persistence
+  PatternTester.Rendering/      Pattern drawing/canvas logic
+tests/
+  PatternTester.Core.Tests/     Unit tests for PatternTester.Core
+installer/                      Inno Setup script + packaging PowerShell script
+docs/                           This documentation (MkDocs Material)
+assets/                         Repository-level images (icon, README screenshots)
+</code></pre></div>
+<p>Each project has a single responsibility: <code>Core</code> has no UI or platform dependency, <code>Rendering</code> turns pattern definitions into pixels, <code>Infrastructure</code> only knows how to read/write the JSON settings file, and <code>App</code> wires everything together with Avalonia.</p>
+<hr />
+<h1 id="patterntesterapp-layout"><code>PatternTester.App</code> Layout<a class="headerlink" href="#patterntesterapp-layout" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>App.axaml / App.axaml.cs        Application entry point, theme setup
+MainWindow.axaml(.cs)           Main control window (menus, pattern config panel)
+PatternWindow.axaml(.cs)        Fullscreen pattern display window
+SettingsWindow.axaml(.cs)       Tabbed settings dialog
+MonitorInfoWindow.axaml(.cs)    Detailed per-monitor information panel
+MonitorIdentificationWindow.*   Fullscreen &quot;MONITOR n&quot; overlay used by Identify Monitors
+AboutWindow.axaml(.cs)          About dialog
+ViewModels/                     MainWindowViewModel and supporting view-model types
+Services/                       Platform services (see below)
+Styles/Theme.axaml              Shared design tokens (colors, card style, base font size)
+Languages/it.json, en.json      UI string tables
+Assets/                         Icon (.ico/.png) and built-in pattern preview images
+</code></pre></div>
+<h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LinuxMonitorInfoService</code></td>
+<td>Populates <strong>Info Monitor</strong> fields on Linux by shelling out to <code>xrandr</code>/<code>xdpyinfo</code></td>
+</tr>
+<tr>
+<td><code>WindowsMonitorInfoService</code></td>
+<td>Same purpose on Windows, via P/Invoke (<code>EnumDisplaySettings</code>, <code>GetDeviceCaps</code>) — no external process needed</td>
+</tr>
+<tr>
+<td><code>Win32WindowPlacement</code></td>
+<td>Native <code>SetWindowPos</code> fallback used to position the fullscreen pattern window on Windows, in addition to Avalonia's own <code>Window.Position</code>/<code>Screens</code> APIs</td>
+</tr>
+<tr>
+<td><code>LocalizationService</code></td>
+<td>Loads <code>Languages/*.json</code> and exposes translated strings as dynamic resources</td>
+</tr>
+</tbody>
+</table>
+<p><code>LinuxMonitorInfoService</code> and <code>WindowsMonitorInfoService</code> are <strong>not</strong> behind a shared interface; the caller (<code>MainWindow.axaml.cs</code>) branches on <code>OperatingSystem.IsWindows()</code> and calls the appropriate one directly. Each method degrades gracefully (returns <code>"N/D"</code>/<code>"N/A"</code> for a field) rather than throwing, so a missing platform API never crashes the info panel.</p>
+<hr />
+<h1 id="theming">Theming<a class="headerlink" href="#theming" title="Permanent link">&para;</a></h1>
+<p><code>Styles/Theme.axaml</code> is merged into <code>App.axaml</code> <strong>after</strong> <code>&lt;FluentTheme /&gt;</code>, so its resources take precedence:</p>
+<ul>
+<li><code>SystemAccentColor</code> and its light/dark variants are overridden with the application's own accent color — this alone re-colors every FluentTheme control that uses the accent (buttons, sliders, toggle switches, menu highlights) without needing custom <code>ControlTemplate</code>s.</li>
+<li>Colors that must differ between light and dark mode (card/header backgrounds, muted text) live inside <code>ResourceDictionary.ThemeDictionaries</code>, keyed <code>"Dark"</code> / <code>"Light"</code>, and are referenced with <code>DynamicResource</code> so they switch live.</li>
+<li>A global <code>Style Selector="TextBlock"</code> sets the base font size for the whole app; any window/control with an explicit local <code>FontSize</code> overrides it, since local values always win over style setters in Avalonia.</li>
+<li>A global <code>Style Selector="Window"</code> sets <code>Background="{DynamicResource AppWindowBackgroundBrush}"</code> on every window, replacing FluentTheme's plain white light-mode background with a softer off-white.</li>
+</ul>
+<p>The active theme is controlled by <code>Application.Current.RequestedThemeVariant</code> (<code>ThemeVariant.Light</code> / <code>.Dark</code>), toggled from <code>MainWindowViewModel.UseDarkTheme</code> / <code>UseLightTheme</code> and applied in <code>MainWindow.ApplyTheme()</code>.</p>
+<p>To add a new shared design token: add it to <code>Theme.axaml</code> (inside <code>ThemeDictionaries</code> if it must differ per theme, or as a plain resource otherwise) and reference it elsewhere with <code>{DynamicResource YourKey}</code> — never hardcode a color for anything that should adapt to the theme.</p>
+<hr />
+<h1 id="configuration-persistence">Configuration Persistence<a class="headerlink" href="#configuration-persistence" title="Permanent link">&para;</a></h1>
+<p><code>PatternTester.Infrastructure.ConfigurationService</code> reads and writes a single JSON file:</p>
+<ul>
+<li>Windows: <code>%APPDATA%\PatternTester\patterntester.json</code></li>
+<li>Linux: <code>~/.config/PatternTester/patterntester.json</code></li>
+</ul>
+<p>It hydrates a <code>DisplaySettings</code> object (current pattern, monitor, columns/rows) and an <code>ApplicationSettings</code> object (theme, startup mode, save mode, language, default values) at startup, and serializes them back on save. <code>MainWindowViewModel</code>'s constructor calls <code>Load()</code> and then must explicitly re-run the "highlight the active option" logic (<code>UpdateColumnSelection</code>, <code>UpdateRowSelection</code>, and — via <code>RefreshMonitors()</code> — <code>UpdateMonitorSelection</code>) for any menu item that mirrors a loaded value, because the constructor sets backing fields directly rather than through the property setters that normally trigger those updates.</p>
+<p>When adding a new persisted setting: add the property to <code>ApplicationSettings</code> (or <code>DisplaySettings</code>), add it to the private <code>SettingsData</code>/equivalent DTO in <code>ConfigurationService</code>, and wire both <code>Load()</code> and <code>Save()</code>.</p>
+<hr />
+<h1 id="multi-monitor-and-dpi-handling">Multi-Monitor and DPI Handling<a class="headerlink" href="#multi-monitor-and-dpi-handling" title="Permanent link">&para;</a></h1>
+<p>This is the area most worth understanding before touching window-placement code.</p>
+<ul>
+<li>Avalonia's <code>Screen.Bounds</code> is expressed in <strong>physical pixels</strong>.</li>
+<li>Avalonia's <code>Window.Width</code> / <code>Window.Height</code> are expressed in <strong>logical pixels (DIPs)</strong>.</li>
+<li>At 100% display scaling the two coincide, which can hide bugs during casual testing; at any other scaling (125%, 150%, ...) a window sized directly from <code>Screen.Bounds.Width/Height</code> ends up larger or smaller than the physical screen, clipping content at the edges.</li>
+</ul>
+<p>The fix applied throughout <code>PatternWindow</code> and <code>MonitorIdentificationWindow</code> is to always divide by <code>Screen.Scaling</code> when assigning <code>Width</code>/<code>Height</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Width</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">screen</span><span class="p">.</span><span class="n">Bounds</span><span class="p">.</span><span class="n">Width</span><span class="w">  </span><span class="o">/</span><span class="w"> </span><span class="n">screen</span><span class="p">.</span><span class="n">Scaling</span><span class="p">;</span>
+<span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">screen</span><span class="p">.</span><span class="n">Bounds</span><span class="p">.</span><span class="n">Height</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">screen</span><span class="p">.</span><span class="n">Scaling</span><span class="p">;</span>
+</code></pre></div>
+<p><code>Window.Position</code> (a <code>PixelPoint</code>) is already in physical pixels and needs no conversion.</p>
+<p>On Windows, <code>PatternWindow</code> also re-applies its position/size through <code>Win32WindowPlacement</code> (native <code>SetWindowPos</code>) after <code>Show()</code>, as a defensive measure against a known Avalonia Win32-backend quirk where a window's initial placement can be reset during creation. <code>app.manifest</code> declares Per-Monitor-V2 DPI awareness, which is required for Windows to report correct per-monitor scaling in the first place — without it, Windows applies DPI virtualization and the numbers above are unreliable.</p>
+<p><strong>Menu selection binding pitfall:</strong> menu items generated from an <code>ItemsSource</code> (e.g. the Monitor/Columns/Rows submenus) with a <code>Click</code> handler attached to the <em>parent</em> <code>MenuItem</code> will report the parent as <code>sender</code> when the click bubbles up, not the clicked child. Handlers for those menus read <code>e.Source</code> instead of <code>sender</code>, or (preferred, used for Columns/Rows/Monitor) attach <code>Click</code> directly to each generated <code>ToggleButton</code> via the <code>DataTemplate</code>, so <code>sender</code> is correct without relying on bubbling at all.</p>
+<hr />
+<h1 id="building">Building<a class="headerlink" href="#building" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>dotnet<span class="w"> </span>restore
+dotnet<span class="w"> </span>build
+dotnet<span class="w"> </span><span class="nb">test</span>
+dotnet<span class="w"> </span>run<span class="w"> </span>--project<span class="w"> </span>src/PatternTester.App
+</code></pre></div>
+<h1 id="publishing-a-windows-executable">Publishing a Windows Executable<a class="headerlink" href="#publishing-a-windows-executable" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="n">dotnet</span> <span class="n">publish</span> <span class="n">src</span><span class="p">/</span><span class="n">PatternTester</span><span class="p">.</span><span class="n">App</span><span class="p">/</span><span class="n">PatternTester</span><span class="p">.</span><span class="n">App</span><span class="p">.</span><span class="n">csproj</span> <span class="n">-c</span> <span class="n">Release</span> <span class="n">-r</span> <span class="n">win-x64</span> <span class="p">-</span><span class="n">-self-contained</span> <span class="n">true</span> <span class="n">-p</span><span class="p">:</span><span class="n">PublishSingleFile</span><span class="p">=</span><span class="n">true</span> <span class="n">-p</span><span class="p">:</span><span class="n">IncludeNativeLibrariesForSelfExtract</span><span class="p">=</span><span class="n">true</span> <span class="n">-o</span> <span class="n">publish</span>
+</code></pre></div>
+<h1 id="building-the-windows-installer">Building the Windows Installer<a class="headerlink" href="#building-the-windows-installer" title="Permanent link">&para;</a></h1>
+<p><code>installer/build-and-package.ps1</code> automates the two steps above plus Inno Setup compilation:</p>
+<div class="highlight"><pre><span></span><code><span class="p">.\</span><span class="n">installer</span><span class="p">\</span><span class="n">build</span><span class="o">-and</span><span class="n">-package</span><span class="p">.</span><span class="n">ps1</span>
+</code></pre></div>
+<p>Optional parameters: <code>-Version "1.2.0"</code>, <code>-SkipInstaller</code> (publish only). It looks for <code>ISCC.exe</code> (Inno Setup's command-line compiler) and offers to install it via <code>winget</code> if missing. The generated installer:</p>
+<ul>
+<li>copies the self-contained executable, <code>LICENSE.txt</code>, <code>CHANGELOG.txt</code> and <code>KNOWN_ISSUES.txt</code> into the install directory;</li>
+<li>shows the GPL-3.0 license (<code>LicenseFile=</code>) before installation, translated setup UI (Italian/English via <code>[Languages]</code>);</li>
+<li>offers optional "View changelog" / "View known issues" checkboxes on the final page.</li>
+</ul>
+<p><code>installer/PatternTester.iss</code> and <code>installer/build-and-package.ps1</code> both resolve paths relative to their own location, so they work whether <code>installer/</code> sits at the repository root or is moved (as long as the two files stay together and <code>src/</code> stays one level above).</p>
+<hr />
+<h1 id="coding-guidelines">Coding Guidelines<a class="headerlink" href="#coding-guidelines" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Keep methods short and single-purpose.</li>
+<li>Prefer composition over inheritance.</li>
+<li>Avoid duplicated logic between the Windows and Linux code paths where the underlying data is the same shape (see <code>WindowsMonitorInfoService</code>/<code>LinuxMonitorInfoService</code> for the accepted exception: platform-specific data sources with a shared consumer).</li>
+<li>All source code comments must be written in English (Italian is fine in commit messages/PRs/discussions, not in code).</li>
+<li>Never hardcode a themeable color; use <code>Theme.axaml</code> resources.</li>
+<li>When adding a window, follow the existing pattern: apply <code>Classes="card"</code> to grouping <code>Border</code>s, <code>Classes="section-title"</code> to section headers, and reference <code>Icon="avares://PatternTester.App/Assets/icon.png"</code> (the <code>.ico</code> is Windows-executable-icon only, not for in-app window icons — Avalonia's own image decoder handles <code>.png</code> more reliably than multi-resolution <code>.ico</code>).</li>
+</ul>
+<hr />
+<h1 id="version-control">Version Control<a class="headerlink" href="#version-control" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Feature branches, small commits, descriptive messages.</li>
+<li>Pull requests for anything touching shared infrastructure (<code>Theme.axaml</code>, <code>ConfigurationService</code>, <code>ApplicationSettings</code>).</li>
+<li>Update this documentation when a change affects architecture, persisted settings, or platform-specific behavior.</li>
+</ul>
+<hr />
+<h1 id="known-limitations">Known Limitations<a class="headerlink" href="#known-limitations" title="Permanent link">&para;</a></h1>
+<p>See <a href="https://github.com/datasoftsrl/PatternTester/blob/main/installer/KNOWN_ISSUES.txt"><code>installer/KNOWN_ISSUES.txt</code></a> for the current list (per-channel color depth unavailable on Windows without EDID parsing, refresh-rate lookup depending on Avalonia's reported device name matching Windows' own naming, etc.).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../user/" class="md-footer__link md-footer__link--prev" aria-label="Previous: User Guide">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                User Guide
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../architecture/" class="md-footer__link md-footer__link--next" aria-label="Next: Software Architecture">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Software Architecture
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © DataSoft Srl
+
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "navigation.instant", "navigation.indexes", "search.highlight", "search.share", "search.suggest", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

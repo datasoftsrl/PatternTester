@@ -1,0 +1,11 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:rendering="using:PatternTester.Rendering"
+        x:Class="PatternTester.App.PatternWindow"
+        WindowDecorations="None"
+        ShowInTaskbar="False"
+        CanResize="False"
+        Topmost="False"
+        Background="Black">
+  <rendering:PatternCanvas x:Name="Canvas" />
+</Window>

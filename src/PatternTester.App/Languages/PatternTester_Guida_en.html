@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pattern Tester — User Guide</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f4f4f4;
+    --panel: #ffffff;
+    --text: #222;
+    --muted: #666;
+    --border: #d5d5d5;
+    --accent: #555;
+    --soft: #e8e8e8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.55;
+  }
+  header {
+    background: #dedede;
+    border-bottom: 1px solid #c6c6c6;
+    padding: 34px 24px 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 30px; }
+  header p { margin: 0; color: var(--muted); }
+  .layout {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+  }
+  nav {
+    position: sticky;
+    top: 18px;
+    align-self: start;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  nav strong { display: block; margin-bottom: 8px; }
+  nav a {
+    display: block;
+    padding: 6px 8px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  nav a:hover { background: var(--soft); }
+  main {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+  }
+  section { margin-bottom: 34px; }
+  h2 {
+    font-size: 22px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 7px;
+  }
+  h3 { font-size: 17px; margin-top: 22px; }
+  code, kbd {
+    background: #eeeeee;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-family: Consolas, monospace;
+  }
+  .note {
+    background: #eeeeee;
+    border-left: 4px solid #888;
+    padding: 12px 14px;
+    margin: 14px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 18px;
+  }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid var(--border);
+    padding: 9px 10px;
+  }
+  th { background: var(--soft); }
+  .pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .pattern {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: #fafafa;
+  }
+  footer {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0 24px 28px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    nav { position: static; }
+    .pattern-grid { grid-template-columns: 1fr; }
+    main { padding: 20px; }
+  }
+  @media print {
+    body { background: white; }
+    nav { display: none; }
+    .layout { display: block; max-width: none; }
+    main { border: 0; padding: 0; }
+    header { border: 0; }
+    footer { max-width: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div style="max-width:1050px;margin:auto;">
+    <h1>Pattern Tester — User Guide</h1>
+    <p>Quick reference for configuring displays, patterns, and display modes.</p>
+  </div>
+</header>
+
+<div class="layout">
+  <nav>
+    <strong>Contents</strong>
+    <a href="#introduzione">Introduction</a>
+    <a href="#file">File</a>
+    <a href="#display">Display</a>
+    <a href="#pattern">Pattern</a>
+    <a href="#visualizza">View</a>
+    <a href="#impostazioni">Settings</a>
+    <a href="#pattern-settings">Pattern parameters</a>
+    <a href="#aiuto">Help</a>
+  </nav>
+
+  <main>
+    <section id="introduzione">
+      <h2>Introduction</h2>
+      <p>
+        <strong>Pattern Tester</strong> è un'applicazione per visualizzare e configurare
+        pattern di test destinati a uno o più monitor. La finestra principale raccoglie
+        i comandi nei menu e mostra, quando disponibile, l'area di configurazione del
+        pattern selezionato.
+      </p>
+      <div class="note">
+        Questa guida descrive le funzioni attualmente presenti nell'interfaccia.
+        I nomi dei comandi seguono quelli visualizzati nei menu dell'applicazione.
+      </div>
+    </section>
+
+    <section id="file">
+      <h2>File Menu</h2>
+      <table>
+        <tr><th>Command</th><th>Function</th></tr>
+        <tr><td><strong>Save</strong></td><td>Save la configurazione corrente secondo le impostazioni di salvataggio.</td></tr>
+        <tr><td><strong>Settings...</strong></td><td>Opens the application default settings window.</td></tr>
+        <tr><td><strong>Exit</strong></td><td>Closes the application.</td></tr>
+      </table>
+    </section>
+
+    <section id="display">
+      <h2>Display Menu</h2>
+      <h3>Monitor</h3>
+      <p>
+        Permette di scegliere il monitor di destinazione. La selezione del monitor
+        viene mantenuta nella configurazione.
+      </p>
+
+      <h3>Columns</h3>
+      <p>
+        Definisce il numero di colonne utilizzate nella disposizione dei display.
+        La selezione avviene tramite i valori disponibili nel menu.
+      </p>
+
+      <h3>Rows</h3>
+      <p>
+        Defines the number of rows used in the display arrangement.
+      </p>
+
+      <div class="note">
+        Rows e colonne determinano la disposizione della configurazione multi-monitor.
+        I valori selezionati vengono applicati alla visualizzazione del pattern.
+      </div>
+    </section>
+
+    <section id="pattern">
+      <h2>Menu Pattern</h2>
+      <p>
+        Use the <strong>Pattern</strong> menu to select the test pattern to display.
+      </p>
+
+      <div class="pattern-grid">
+        <div class="pattern"><strong>Geometry</strong><br>Geometric test pattern with line and geometry options.</div>
+        <div class="pattern"><strong>Single Color</strong><br>Viewzione uniforme di un singolo colore.</div>
+        <div class="pattern"><strong>Gray</strong><br>Grayscale pattern with adjustable level.</div>
+        <div class="pattern"><strong>Gamma</strong><br>Checkerboard pattern used to check gamma response.</div>
+        <div class="pattern"><strong>Bars</strong><br>Bar pattern for visual display checks.</div>
+        <div class="pattern"><strong>Color Bars</strong><br>Color bars for checking color reproduction.</div>
+        <div class="pattern"><strong>Gradient to Black</strong><br>Gradient toward black.</div>
+        <div class="pattern"><strong>Two Colors Gradient</strong><br>Gradient between two colors.</div>
+        <div class="pattern"><strong>Chessboard</strong><br>Checkerboard pattern.</div>
+        <div class="pattern"><strong>Phase</strong><br>Pattern intended for phase checks.</div>
+        <div class="pattern"><strong>Color Temperature</strong><br>Pattern for checking color temperature.</div>
+      </div>
+
+      <div class="note">
+        Selezionando un pattern, l'area di configurazione della finestra principale
+        si adatta automaticamente ai parametri disponibili per quel pattern.
+      </div>
+    </section>
+
+    <section id="visualizza">
+      <h2>Menu View</h2>
+      <h3>Show Pattern</h3>
+      <p>
+        Turns pattern display on or off.
+      </p>
+
+      <h3>Show monitor information</h3>
+      <p>
+        Mostra le informazioni relative al monitor. La finestra delle informazioni
+        può essere portata in primo piano per una consultazione immediata.
+      </p>
+    </section>
+
+    <section id="impostazioni">
+      <h2>Settings</h2>
+      <p>
+        La finestra <strong>Settings</strong> permette di definire i valori
+        predefiniti utilizzati dall'applicazione.
+      </p>
+
+      <h3>Startup</h3>
+      <ul>
+        <li><strong>Last configuration</strong>: uses the previous configuration.</li>
+        <li><strong>Default values</strong>: uses the values configured in Settings.</li>
+        <li><strong>Automatically show the pattern at startup</strong>: automatically displays the pattern at startup.</li>
+      </ul>
+
+      <h3>Default values</h3>
+      <ul>
+        <li><strong>Pattern</strong>: pattern iniziale.</li>
+        <li><strong>Monitor</strong>: monitor predefinito.</li>
+        <li><strong>Columns</strong>: numero di colonne predefinito.</li>
+        <li><strong>Rows</strong>: numero di righe predefinito.</li>
+      </ul>
+
+      <h3>Savetaggio</h3>
+      <ul>
+        <li><strong>On exit</strong></li>
+        <li><strong>On every change</strong></li>
+        <li><strong>Solo manualmente con Save</strong></li>
+      </ul>
+    </section>
+
+    <section id="pattern-settings">
+      <h2>Pattern configuration</h2>
+
+      <h3>Geometry</h3>
+      <ul>
+        <li><strong>Lines</strong>: number of pattern lines.</li>
+        <li><strong>Diagonal lines</strong>: enables diagonal lines.</li>
+        <li><strong>Circle</strong>: enables the circle.</li>
+      </ul>
+
+      <h3>Single Color</h3>
+      <p>
+        Permette di scegliere un colore preimpostato tra quelli disponibili,
+        come nero, bianco, rosso, verde, blu, magenta, giallo e ciano.
+      </p>
+
+      <h3>Gray</h3>
+      <p>
+        Il parametro <strong>White %</strong> controlla il livello di bianco
+        del pattern in percentuale.
+      </p>
+
+      <h3>Gamma</h3>
+      <ul>
+        <li><strong>Gamma</strong>: adjustable gamma value.</li>
+        <li><strong>Dimensione scacchiera</strong>: number of cells per side.</li>
+      </ul>
+
+      <div class="note">
+        I parametri specifici degli altri pattern vengono mostrati nell'area
+        di configurazione della finestra principale quando il relativo pattern
+        viene selezionato.
+      </div>
+    </section>
+
+    <section id="aiuto">
+      <h2>Menu Help</h2>
+      <table>
+        <tr><th>Command</th><th>Function</th></tr>
+        <tr><td><strong>Guide</strong></td><td>Opens this documentation.</td></tr>
+        <tr><td><strong>About</strong></td><td>View le informazioni sull'applicazione.</td></tr>
+      </table>
+    </section>
+  </main>
+</div>
+
+<footer>
+  Pattern Tester — User Guide utente. Documento esterno in formato HTML.
+</footer>
+</body>
+</html>

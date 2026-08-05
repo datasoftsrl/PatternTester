@@ -1,0 +1,103 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--
+		Tema condiviso dell'applicazione: sostituisce il colore di accento
+		di default di FluentTheme con quello del brand (blu, coerente con
+		l'icona), e definisce stili riusabili per card e testi di sezione.
+		Merged in App.axaml DOPO <FluentTheme/>, cosi' queste risorse
+		hanno precedenza sui default del tema.
+	-->
+
+	<Styles.Resources>
+		<ResourceDictionary>
+
+			<!--
+				Colori che CAMBIANO tra tema chiaro e scuro (sfondi header/
+				card, testo muto): vanno dentro ThemeDictionaries, non come
+				risorse fisse, altrimenti restano identici anche passando
+				a tema chiaro (era il bug della barra header sempre nera).
+			-->
+			<ResourceDictionary.ThemeDictionaries>
+
+				<ResourceDictionary x:Key="Dark">
+					<SolidColorBrush x:Key="AppWindowBackgroundBrush" Color="#1A1B1F" />
+					<SolidColorBrush x:Key="AppHeaderBackgroundBrush" Color="#15161A" />
+					<SolidColorBrush x:Key="AppCardBackgroundBrush" Color="#1B1D22" />
+					<SolidColorBrush x:Key="AppCardBorderBrush" Color="#2A2D33" />
+					<SolidColorBrush x:Key="AppMutedTextBrush" Color="#9A9CA3" />
+				</ResourceDictionary>
+
+				<ResourceDictionary x:Key="Light">
+					<!-- Sfondo leggermente grigiato invece di bianco puro:
+					     meno "accecante", e dà profondità alle card che
+					     restano bianche sopra di esso. -->
+					<SolidColorBrush x:Key="AppWindowBackgroundBrush" Color="#F1F1F3" />
+					<SolidColorBrush x:Key="AppHeaderBackgroundBrush" Color="#EAEAED" />
+					<SolidColorBrush x:Key="AppCardBackgroundBrush" Color="#FFFFFF" />
+					<SolidColorBrush x:Key="AppCardBorderBrush" Color="#DEDFE3" />
+					<SolidColorBrush x:Key="AppMutedTextBrush" Color="#6B6C72" />
+				</ResourceDictionary>
+
+			</ResourceDictionary.ThemeDictionaries>
+
+			<!-- Colore di accento: identico su entrambi i temi, funziona
+			     bene sia su sfondo chiaro che scuro -->
+			<Color x:Key="SystemAccentColor">#4DABF7</Color>
+			<Color x:Key="SystemAccentColorDark1">#3D93D9</Color>
+			<Color x:Key="SystemAccentColorDark2">#2D77B3</Color>
+			<Color x:Key="SystemAccentColorDark3">#1E5A8C</Color>
+			<Color x:Key="SystemAccentColorLight1">#6FC0FA</Color>
+			<Color x:Key="SystemAccentColorLight2">#94D3FC</Color>
+			<Color x:Key="SystemAccentColorLight3">#BAE4FD</Color>
+			<SolidColorBrush x:Key="AppAccentBrush" Color="#4DABF7" />
+
+		</ResourceDictionary>
+	</Styles.Resources>
+
+	<!-- Sfondo di sfondo per tutte le finestre (sostituisce il bianco
+	     puro di FluentTheme in tema chiaro, troppo "accecante"). -->
+	<Style Selector="Window">
+		<Setter Property="Background" Value="{DynamicResource AppWindowBackgroundBrush}" />
+	</Style>
+
+	<!-- Dimensione font di base uniforme in tutta l'app: le finestre che
+	     non specificano esplicitamente FontSize erediteranno questa,
+	     invece dei default piu' grandi di FluentTheme. Gli elementi con
+	     FontSize esplicito (qui sotto o nelle singole finestre) restano
+	     invariati, perche' un valore locale ha sempre precedenza su
+	     questo Style. -->
+	<Style Selector="TextBlock">
+		<Setter Property="FontSize" Value="13" />
+	</Style>
+
+	<!-- Card contenitore (es. pannello impostazioni pattern) -->
+	<Style Selector="Border.card">
+		<Setter Property="Background" Value="{DynamicResource AppCardBackgroundBrush}" />
+		<Setter Property="BorderBrush" Value="{DynamicResource AppCardBorderBrush}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="CornerRadius" Value="10" />
+		<Setter Property="Padding" Value="14" />
+	</Style>
+
+	<!-- Titolo di sezione dentro una card (es. "Gamma", "Barre colore") -->
+	<Style Selector="TextBlock.section-title">
+		<Setter Property="FontSize" Value="15" />
+		<Setter Property="FontWeight" Value="SemiBold" />
+		<Setter Property="Margin" Value="0,0,0,6" />
+	</Style>
+
+	<!-- Testo secondario/muto (hint, estremi degli slider, ecc.) -->
+	<Style Selector="TextBlock.muted">
+		<Setter Property="Foreground" Value="{DynamicResource AppMutedTextBrush}" />
+		<Setter Property="FontSize" Value="12" />
+	</Style>
+
+	<!-- Valore corrente in evidenza (es. valore gamma, K temperatura colore) -->
+	<Style Selector="TextBlock.value-display">
+		<Setter Property="FontSize" Value="20" />
+		<Setter Property="FontWeight" Value="SemiBold" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+
+</Styles>

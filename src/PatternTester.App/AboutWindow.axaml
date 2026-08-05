@@ -1,0 +1,119 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:PatternTester.App"
+        x:Class="PatternTester.App.AboutWindow"
+        x:DataType="local:AboutWindow"
+        Title="{DynamicResource About.Title}"
+        Icon="avares://PatternTester.App/Assets/icon.png"
+        Width="500"
+        Height="420"
+        MinWidth="500"
+        MinHeight="420"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+
+    <Border Padding="20">
+
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
+
+            <!-- Application icon -->
+            <Image Grid.Row="0"
+                   Width="64"
+                   Height="64"
+                   Margin="0,0,0,12"
+                   HorizontalAlignment="Center"
+                   Source="avares://PatternTester.App/Assets/icon.png"/>
+
+            <!-- Title -->
+            <StackPanel Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        Spacing="4">
+
+                <TextBlock Text="Pattern Test Generator"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
+
+                <TextBlock Text="Professional Monitor Test Pattern Generator"
+                           FontSize="13"
+                           Opacity="0.70"
+                           HorizontalAlignment="Center"/>
+
+            </StackPanel>
+
+            <!-- separator -->
+            <Separator Grid.Row="2"
+                       Margin="0,16,0,16"/>
+
+            <!-- Information -->
+            <Grid Grid.Row="3"
+                  ColumnDefinitions="110,*"
+                  RowDefinitions="Auto,Auto,Auto,Auto"
+                  RowSpacing="8">
+
+                <TextBlock Grid.Row="0"
+                           Text="{DynamicResource About.License}"
+                           FontWeight="SemiBold"/>
+
+                <TextBlock Grid.Row="0"
+                           Grid.Column="1"
+                           Text="GNU General Public License v3.0"/>
+
+                <TextBlock Grid.Row="1"
+                           Text="{DynamicResource About.Version}"
+                           FontWeight="SemiBold"/>
+
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{Binding AppVersion}"/>
+
+                <TextBlock Grid.Row="2"
+                           Text="{DynamicResource About.Website}"
+                           FontWeight="SemiBold"/>
+
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           Text="www.datasoftweb.com"
+                           Cursor="Hand"
+                           PointerPressed="WebsiteClick"/>
+
+                <TextBlock Grid.Row="3"
+                           Text="{DynamicResource About.GitHub}"
+                           FontWeight="SemiBold"/>
+
+                <TextBlock Grid.Row="3"
+                           Grid.Column="1"
+                           Text="github.com/datasoftsrl/PatternTester"
+                           Cursor="Hand"
+                           PointerPressed="GitHubClick"/>
+
+            </Grid>
+
+            <!-- Bottom -->
+            <StackPanel Grid.Row="4"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Spacing="12"
+                        Margin="0,20,0,0">
+
+                <Separator Width="430"/>
+
+                <TextBlock Text="{DynamicResource About.Copyright}"
+                           Opacity="0.70"
+                           HorizontalAlignment="Center"/>
+
+                <Button Content="{DynamicResource About.Close}"
+                        Width="120"
+                        Height="34"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Click="CloseClick"/>
+
+            </StackPanel>
+
+        </Grid>
+
+    </Border>
+
+</Window>

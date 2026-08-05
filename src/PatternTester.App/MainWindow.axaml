@@ -1,0 +1,644 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PatternTester.App.ViewModels"
+        x:Class="PatternTester.App.MainWindow"
+        Icon="avares://PatternTester.App/Assets/icon.png"
+        x:DataType="vm:MainWindowViewModel"
+        Title="{DynamicResource App.Title}"
+        Width="380"
+        SizeToContent="Height"
+        MinWidth="340"
+        MinHeight="120">
+
+    <Grid RowDefinitions="Auto,Auto"
+          Margin="12">
+
+        <!-- MENU -->
+        <Menu Grid.Row="0">
+
+            <!-- FILE -->
+            <MenuItem Header="{DynamicResource Menu.File}">
+                <MenuItem Header="{DynamicResource Menu.Save}"
+                          Click="SaveClick" />
+
+                <Separator />
+
+                <MenuItem Header="{DynamicResource Menu.Settings}"
+                          Click="SettingsClick" />
+
+                <Separator />
+
+                <MenuItem Header="{DynamicResource Menu.Exit}"
+                          Click="ExitClick" />
+            </MenuItem>
+
+
+            <!-- DISPLAY -->
+            <MenuItem Header="{DynamicResource Menu.Display}">
+
+                <MenuItem Header="{DynamicResource Menu.Monitor}"
+                          ItemsSource="{Binding MonitorMenuOptions}">
+
+					<MenuItem.ItemsPanel>
+						<ItemsPanelTemplate>
+							<UniformGrid Columns="8" />
+						</ItemsPanelTemplate>
+					</MenuItem.ItemsPanel>
+
+					<MenuItem.ItemTemplate>
+						<DataTemplate>
+							<ToggleButton Content="{Binding DisplayValue}"
+										  IsChecked="{Binding IsSelected}"
+										  Click="MonitorMenuClick"
+										  Width="40"
+										  HorizontalContentAlignment="Center" />
+						</DataTemplate>
+					</MenuItem.ItemTemplate>
+
+                </MenuItem>
+
+			<MenuItem Header="{DynamicResource Menu.Columns}"
+					  ItemsSource="{Binding ColumnOptions}">
+
+				<MenuItem.ItemsPanel>
+					<ItemsPanelTemplate>
+						<UniformGrid Columns="8" />
+					</ItemsPanelTemplate>
+				</MenuItem.ItemsPanel>
+
+				<MenuItem.ItemTemplate>
+					<DataTemplate>
+						<ToggleButton Content="{Binding DisplayValue}"
+									  IsChecked="{Binding IsSelected}"
+									  Click="ColumnsMenuClick"
+									  Width="40"
+									  HorizontalContentAlignment="Center" />
+					</DataTemplate>
+				</MenuItem.ItemTemplate>
+
+			</MenuItem>
+
+			<MenuItem Header="{DynamicResource Menu.Rows}"
+					  ItemsSource="{Binding RowOptions}">
+
+				<MenuItem.ItemsPanel>
+					<ItemsPanelTemplate>
+						<UniformGrid Columns="8" />
+					</ItemsPanelTemplate>
+				</MenuItem.ItemsPanel>
+
+				<MenuItem.ItemTemplate>
+					<DataTemplate>
+						<ToggleButton Content="{Binding DisplayValue}"
+									  IsChecked="{Binding IsSelected}"
+									  Click="RowsMenuClick"
+									  Width="40"
+									  HorizontalContentAlignment="Center" />
+					</DataTemplate>
+				</MenuItem.ItemTemplate>
+
+			</MenuItem>
+
+            </MenuItem>
+
+
+            <!-- PATTERN -->
+            <MenuItem Header="{DynamicResource Menu.Pattern}">
+
+                <MenuItem Header="{DynamicResource Menu.Geometry}"
+                          Tag="0"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.SingleColor}"
+                          Tag="1"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.Gray}"
+                          Tag="2"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.Gamma}"
+                          Tag="3"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.Bars}"
+                          Tag="4"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.ColorBars}"
+                          Tag="5"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.GradientToBlack}"
+                          Tag="6"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.TwoColorsGradient}"
+                          Tag="7"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.Chessboard}"
+                          Tag="8"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.Phase}"
+                          Tag="9"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.ColorTemperature}"
+                          Tag="10"
+                          Click="PatternMenuClick" />
+
+                <MenuItem Header="{DynamicResource Menu.Overscan}"
+                          Tag="11"
+                          Click="PatternMenuClick" />
+
+              </MenuItem>
+
+			<!-- VISUALIZZA -->
+			<MenuItem Header="{DynamicResource Menu.View}">
+
+				<MenuItem Header="{DynamicResource Menu.ShowPattern}"
+						  IsChecked="{Binding TestMode}"
+						  ToggleType="CheckBox"
+						  Click="TestModeMenuClick" />
+
+				<MenuItem Header="{DynamicResource Menu.ShowMonitorInfo}"
+						  IsChecked="{Binding ShowMonitorInfo}"
+						  ToggleType="CheckBox"
+						  Click="MonitorInfoMenuClick" />
+
+				<MenuItem Header="{DynamicResource Menu.IdentifyMonitors}"
+						  Click="IdentifyMonitorsClick" />
+
+			</MenuItem>
+
+            <!-- AIUTO -->
+            <MenuItem Header="{DynamicResource Menu.Help}">
+
+                <MenuItem Header="{DynamicResource Menu.Guide}"
+                          Click="HelpClick" />
+
+                <MenuItem Header="{DynamicResource Menu.About}"
+                          Click="AboutClick" />
+
+            </MenuItem>
+
+        </Menu>
+
+
+        <!-- AREA SETTING DEL PATTERN -->
+        <Border Grid.Row="1"
+                Classes="card"
+                Margin="0,10,0,0">
+
+            <Grid>
+
+                <!-- GEOMETRY -->
+                <StackPanel IsVisible="{Binding IsGeometrySelected}"
+                            Spacing="10">
+
+                    <TextBlock Text="{DynamicResource Pattern.Geometry}"
+                               Classes="section-title" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Lines}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <NumericUpDown Value="{Binding GeometryLines}"
+                                       Minimum="0"
+                                       Maximum="16"
+                                       Increment="1"
+                                       FormatString="0"
+                                       Width="120" />
+
+                    </StackPanel>
+
+                    <CheckBox Content="{DynamicResource Pattern.DiagonalLines}"
+                              IsChecked="{Binding GeometryDiagonal}" />
+
+                    <CheckBox Content="{DynamicResource Pattern.Circle}"
+                              IsChecked="{Binding GeometryCircle}" />
+
+                </StackPanel>
+
+
+                <!-- SINGLE COLOR -->
+                <StackPanel IsVisible="{Binding IsSingleColorSelected}"
+                            Spacing="10">
+
+                    <TextBlock Text="{DynamicResource Pattern.SingleColor}"
+                               Classes="section-title" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Preset}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding PresetColors}"
+                                  SelectedItem="{Binding SingleColorName}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+                <!-- GRAY -->
+                <StackPanel IsVisible="{Binding IsGraySelected}"
+                            Spacing="10">
+
+                    <TextBlock Text="{DynamicResource Pattern.Gray}"
+                               Classes="section-title" />
+
+                    <TextBlock Text="{DynamicResource Pattern.WhitePercent}" />
+
+                    <Slider Minimum="0"
+                            Maximum="100"
+                            Value="{Binding GrayWhite}"
+                            Width="280" />
+
+                    <TextBlock Text="{Binding GrayWhite, StringFormat='{}{0:0.0}%'}"
+                               HorizontalAlignment="Right" />
+
+                </StackPanel>
+
+
+				<!-- GAMMA -->
+				<StackPanel IsVisible="{Binding IsGammaSelected}"
+							Spacing="6">
+
+					<TextBlock Text="{DynamicResource Pattern.Gamma}"
+							   Classes="section-title" />
+
+					<!-- VALORE GAMMA -->
+					<Grid ColumnDefinitions="*,Auto,*"
+						  Width="280"
+						  HorizontalAlignment="Center">
+
+						<TextBlock Grid.Column="0"
+								   Text="1.0"
+								   VerticalAlignment="Center"
+								   Opacity="0.7" />
+
+						<TextBlock Grid.Column="1"
+								   Text="{Binding GammaValue, StringFormat='{}{0:0.0}'}"
+								   FontSize="18"
+								   FontWeight="SemiBold"
+								   HorizontalAlignment="Center" />
+
+						<TextBlock Grid.Column="2"
+								   Text="3.5"
+								   VerticalAlignment="Center"
+								   HorizontalAlignment="Right"
+								   Opacity="0.7" />
+
+					</Grid>
+
+					<Slider Minimum="1.0"
+							Maximum="3.5"
+							Value="{Binding GammaValue}"
+							Width="280"
+							TickFrequency="0.1"
+							IsSnapToTickEnabled="True"
+							HorizontalAlignment="Center" />
+
+					<!-- SCACCHIERA -->
+					<TextBlock Text="{DynamicResource Pattern.GridSize}"
+							   HorizontalAlignment="Center"
+							   FontWeight="SemiBold"
+							   Margin="0,8,0,0" />
+
+					<TextBlock Text="{Binding GammaCells, StringFormat='{}{0} × {0} celle'}"
+							   HorizontalAlignment="Center"
+							   Classes="section-title" />
+
+					<Slider Minimum="4"
+							Maximum="128"
+							Value="{Binding GammaCells}"
+							Width="280"
+							TickFrequency="4"
+							IsSnapToTickEnabled="True"
+							HorizontalAlignment="Center" />
+
+					<Grid Width="280"
+						  ColumnDefinitions="*,*">
+
+						<TextBlock Grid.Column="0"
+								   Text="4 × 4"
+								   HorizontalAlignment="Left"
+								   Opacity="0.7" />
+
+						<TextBlock Grid.Column="1"
+								   Text="128 x 128"
+								   HorizontalAlignment="Right"
+								   Opacity="0.7" />
+
+					</Grid>
+
+				</StackPanel>
+
+
+                <!-- BARS -->
+                <StackPanel IsVisible="{Binding IsBarsSelected}"
+                            Spacing="10">
+
+                    <TextBlock Text="{DynamicResource Pattern.Bars}"
+                               Classes="section-title" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Color}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding PresetColors}"
+                                  SelectedItem="{Binding BarsColorName}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Direction}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding Directions}"
+                                  SelectedItem="{Binding BarsDirection}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.BarsNumber}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <NumericUpDown Value="{Binding BarsNumber}"
+                                       Minimum="1"
+                                       Maximum="32"
+                                       Increment="1"
+				       FormatString="0"
+                                       Width="120" />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+                <!-- COLOR BARS -->
+                <StackPanel IsVisible="{Binding IsColorBarsSelected}"
+                            Spacing="10">
+
+                    <TextBlock Text="{DynamicResource Pattern.ColorBars}"
+                               Classes="section-title" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Direction}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding Directions}"
+                                  SelectedItem="{Binding ColorBarsDirection}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+                <!-- GRADIENT TO BLACK -->
+                <StackPanel IsVisible="{Binding IsGradientSelected}"
+                            Spacing="10">
+
+                    <TextBlock Text="{DynamicResource Pattern.GradientToBlack}"
+                               Classes="section-title" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Color}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding PresetColors}"
+                                  SelectedItem="{Binding GradientColorName}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Direction}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding Directions}"
+                                  SelectedItem="{Binding GradientDirection}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+                <!-- TWO COLORS GRADIENT -->
+                <StackPanel IsVisible="{Binding IsTwoColorsGradientSelected}"
+                            Spacing="10">
+
+                    <TextBlock Text="{DynamicResource Pattern.TwoColorsGradient}"
+                               Classes="section-title" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Start}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding PresetColors}"
+                                  SelectedItem="{Binding GradientStartColorName}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.End}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding PresetColors}"
+                                  SelectedItem="{Binding GradientEndColorName}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Direction}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding Directions}"
+                                  SelectedItem="{Binding Gradient2Direction}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+                <!-- CHESSBOARD -->
+                <StackPanel IsVisible="{Binding IsChessboardSelected}"
+                            Spacing="10">
+
+                    <TextBlock Text="{DynamicResource Pattern.Chessboard}"
+                               Classes="section-title" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.SquaresPerSide}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+
+	                      <NumericUpDown Value="{Binding ChessboardSquares}"
+                                        Minimum="2"
+                                        Maximum="16"
+			                Increment="1"
+               				FormatString="0"
+                                        Width="120" />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+                <!-- PHASE -->
+                <StackPanel IsVisible="{Binding IsPhaseSelected}"
+                            Spacing="10">
+
+                    <TextBlock Text="{DynamicResource Pattern.Phase}"
+                               Classes="section-title" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+
+                        <TextBlock Text="{DynamicResource Pattern.Direction}"
+                                   VerticalAlignment="Center"
+                                   Width="100" />
+
+                        <ComboBox ItemsSource="{Binding Directions}"
+                                  SelectedItem="{Binding PhaseDirection}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+                <!-- COLOR TEMPERATURE -->
+		
+				<Grid IsVisible="{Binding IsColorTemperatureSelected}"
+					  Width="300"
+					  HorizontalAlignment="Center"
+					  RowDefinitions="Auto,Auto"
+					  ColumnDefinitions="Auto,*,Auto">
+
+					<!-- MINIMO -->
+					<TextBlock Grid.Row="1"
+							   Grid.Column="0"
+							   Text="2400 K"
+							   VerticalAlignment="Center"
+							   Margin="0,0,8,0"
+							   Opacity="0.7" />
+
+					<!-- VALORE CORRENTE -->
+					<TextBlock Grid.Row="0"
+							   Grid.Column="1"
+							   Text="{Binding ColorTemperatureKelvin, StringFormat='{}{0} K'}"
+							   HorizontalAlignment="Center"
+							   Classes="section-title"
+							   Margin="0,0,0,4" />
+
+					<!-- SLIDER -->
+					<Slider Grid.Row="1"
+							Grid.Column="1"
+							Minimum="2400"
+							Maximum="9500"
+							Value="{Binding ColorTemperatureKelvin}"
+							Width="220"
+							HorizontalAlignment="Center"
+							TickFrequency="100"
+							IsSnapToTickEnabled="True" />
+
+					<!-- MASSIMO -->
+					<TextBlock Grid.Row="1"
+							   Grid.Column="2"
+							   Text="9500 K"
+							   VerticalAlignment="Center"
+							   Margin="8,0,0,0"
+							   Opacity="0.7" />
+
+			
+</Grid>
+
+				<!-- OVERSCAN -->
+				<StackPanel IsVisible="{Binding IsOverscanSelected}"
+							Width="300"
+							HorizontalAlignment="Center"
+							Spacing="16">
+
+					<StackPanel Spacing="4">
+						<TextBlock Text="{DynamicResource Pattern.ActionSafe}"
+								   HorizontalAlignment="Center"
+								   Classes="muted" />
+						<TextBlock Text="{Binding OverscanActionSafePercent, StringFormat='{}{0:0}%'}"
+								   HorizontalAlignment="Center"
+								   Classes="section-title" />
+						<Slider Minimum="0"
+								Maximum="45"
+								Value="{Binding OverscanActionSafePercent}"
+								TickFrequency="1"
+								IsSnapToTickEnabled="True" />
+					</StackPanel>
+
+					<StackPanel Spacing="4">
+						<TextBlock Text="{DynamicResource Pattern.TitleSafe}"
+								   HorizontalAlignment="Center"
+								   Classes="muted" />
+						<TextBlock Text="{Binding OverscanTitleSafePercent, StringFormat='{}{0:0}%'}"
+								   HorizontalAlignment="Center"
+								   Classes="section-title" />
+						<Slider Minimum="0"
+								Maximum="45"
+								Value="{Binding OverscanTitleSafePercent}"
+								TickFrequency="1"
+								IsSnapToTickEnabled="True" />
+					</StackPanel>
+
+				</StackPanel>
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
+</Window>

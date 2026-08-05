@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/PatternTester.App/PatternTester.App.csproj" />
+  <Project Path="src/PatternTester.Core/PatternTester.Core.csproj" />
+  <Project Path="src/PatternTester.Rendering/PatternTester.Rendering.csproj" />
+  <Project Path="src/PatternTester.Infrastructure/PatternTester.Infrastructure.csproj" />
+  <Project Path="tests/PatternTester.Core.Tests/PatternTester.Core.Tests.csproj" />
+</Solution>

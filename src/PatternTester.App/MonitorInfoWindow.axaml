@@ -1,0 +1,220 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PatternTester.App.ViewModels"
+        x:Class="PatternTester.App.MonitorInfoWindow"
+        Icon="avares://PatternTester.App/Assets/icon.png"
+        x:DataType="vm:MonitorInfoViewModel"
+        Title="{DynamicResource MonitorInfo.Title}"
+        Width="500"
+        Height="650"
+        MinWidth="440"
+        MinHeight="500">
+
+    <Grid Margin="20"
+          RowDefinitions="Auto,*,Auto"
+          RowSpacing="16">
+
+        <TextBlock Grid.Row="0"
+                   Text="{DynamicResource MonitorInfo.Title}"
+                   FontSize="20"
+                   FontWeight="SemiBold" />
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto">
+
+            <StackPanel Spacing="18">
+
+                <!-- MONITOR -->
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="{DynamicResource MonitorInfo.MonitorSection}"
+                               FontSize="13"
+                               FontWeight="Bold"
+                               Opacity="0.7" />
+
+                    <Grid ColumnDefinitions="190,*"
+                          RowDefinitions="Auto,Auto,Auto,Auto"
+                          RowSpacing="7">
+
+                        <TextBlock Grid.Row="0"
+                                   Text="{DynamicResource MonitorInfo.Monitor}" />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding MonitorNumber}" />
+
+                        <TextBlock Grid.Row="1"
+                                   Text="{DynamicResource MonitorInfo.DisplayName}" />
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding DisplayName}" />
+
+                        <TextBlock Grid.Row="2"
+                                   Text="{DynamicResource MonitorInfo.Primary}" />
+
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="{Binding IsPrimary}" />
+
+                        <TextBlock Grid.Row="3"
+                                   Text="{DynamicResource MonitorInfo.Orientation}" />
+
+                        <TextBlock Grid.Row="3"
+                                   Grid.Column="1"
+                                   Text="{Binding Orientation}" />
+
+                    </Grid>
+                </StackPanel>
+
+                <!-- VIDEO -->
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="{DynamicResource MonitorInfo.Video}"
+                               FontSize="13"
+                               FontWeight="Bold"
+                               Opacity="0.7" />
+
+                    <Grid ColumnDefinitions="190,*"
+                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                          RowSpacing="7">
+
+                        <TextBlock Grid.Row="0"
+                                   Text="{DynamicResource MonitorInfo.Resolution}" />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding Resolution}" />
+
+                        <TextBlock Grid.Row="1"
+                                   Text="{DynamicResource MonitorInfo.RefreshRate}" />
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding RefreshRate}" />
+
+                        <TextBlock Grid.Row="2"
+                                   Text="{DynamicResource MonitorInfo.WorkingArea}" />
+
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="{Binding WorkingArea}" />
+
+                        <TextBlock Grid.Row="3"
+                                   Text="{DynamicResource MonitorInfo.PhysicalSize}" />
+
+                        <TextBlock Grid.Row="3"
+                                   Grid.Column="1"
+                                   Text="{Binding PhysicalSize}" />
+
+                        <TextBlock Grid.Row="4"
+                                   Text="{DynamicResource MonitorInfo.Scaling}" />
+
+                        <TextBlock Grid.Row="4"
+                                   Grid.Column="1"
+                                   Text="{Binding Scaling}" />
+
+                        <TextBlock Grid.Row="5"
+                                   Text="{DynamicResource MonitorInfo.Dpi}" />
+
+                        <TextBlock Grid.Row="5"
+                                   Grid.Column="1"
+                                   Text="{Binding Dpi}" />
+
+                    </Grid>
+                </StackPanel>
+
+                <!-- COLORE -->
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="{DynamicResource MonitorInfo.Color}"
+                               FontSize="13"
+                               FontWeight="Bold"
+                               Opacity="0.7" />
+
+                    <Grid ColumnDefinitions="190,*"
+                          RowDefinitions="Auto,Auto"
+                          RowSpacing="7">
+
+                        <TextBlock Grid.Row="0"
+                                   Text="{DynamicResource MonitorInfo.ColorDepth}" />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding ColorDepth}" />
+
+                        <TextBlock Grid.Row="1"
+                                   Text="{DynamicResource MonitorInfo.PanelColorDepth}" />
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding PanelColorDepth}" />
+
+                    </Grid>
+                </StackPanel>
+
+                <!-- SISTEMA -->
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="{DynamicResource MonitorInfo.System}"
+                               FontSize="13"
+                               FontWeight="Bold"
+                               Opacity="0.7" />
+
+                    <Grid ColumnDefinitions="190,*"
+                          RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                          RowSpacing="7">
+
+                        <TextBlock Grid.Row="0"
+                                   Text="{DynamicResource MonitorInfo.OS}" />
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding OperatingSystem}"
+                                   TextWrapping="Wrap" />
+
+                        <TextBlock Grid.Row="1"
+                                   Text="{DynamicResource MonitorInfo.DesktopEnvironment}" />
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding DesktopEnvironment}" />
+
+                        <TextBlock Grid.Row="2"
+                                   Text="{DynamicResource MonitorInfo.Session}" />
+
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="{Binding SessionType}" />
+
+                        <TextBlock Grid.Row="3"
+                                   Text="{DynamicResource MonitorInfo.Kernel}" />
+
+                        <TextBlock Grid.Row="3"
+                                   Grid.Column="1"
+                                   Text="{Binding Kernel}"
+                                   TextWrapping="Wrap" />
+
+                        <TextBlock Grid.Row="4"
+                                   Text="{DynamicResource MonitorInfo.Architecture}" />
+
+                        <TextBlock Grid.Row="4"
+                                   Grid.Column="1"
+                                   Text="{Binding Architecture}" />
+
+                    </Grid>
+                </StackPanel>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+        <Button Grid.Row="2"
+                Content="{DynamicResource MonitorInfo.Close}"
+                HorizontalAlignment="Right"
+                Padding="22,8"
+                Click="CloseClick" />
+
+    </Grid>
+
+</Window>

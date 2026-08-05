@@ -1,0 +1,50 @@
+PatternTester - Changelog
+==========================
+
+Versione 1.0.0
+---------------
+
+MULTI-MONITOR (WINDOWS)
+- Corretto bug per cui il pattern veniva sempre mostrato sul monitor 1,
+  anche selezionando un monitor diverso dal menu Display (il problema
+  era nel binding del menu, non nel posizionamento della finestra).
+- Aggiunto manifest applicativo con supporto Per-Monitor V2 DPI
+  awareness, necessario per un corretto posizionamento su Windows con
+  piu' monitor e scaling diversi tra loro.
+- Aggiunto posizionamento nativo Win32 come ulteriore protezione contro
+  bug noti del backend Windows di Avalonia in ambienti multi-monitor.
+- Corretto bug di rendering con scaling diverso dal 100% (es. 125%):
+  il pattern poteva risultare tagliato sui bordi (es. contorno del
+  pattern "Geometria" incompleto).
+
+FINESTRA INFO MONITOR
+- Dati completi anche su Windows (risoluzione, refresh rate, dimensioni
+  fisiche, sistema operativo, ecc.), prima disponibili solo su Linux.
+- Corrette righe duplicate/andate a capo per errore.
+- La finestra ora resta visibile sopra al pattern anche con un solo
+  monitor, invece di finire nascosta dietro.
+
+FINESTRA IDENTIFICA MONITOR
+- Aggiunta risoluzione (e refresh rate su Windows) sotto al numero del
+  monitor, utile per riconoscere a colpo d'occhio ogni schermo in
+  configurazioni multi-monitor.
+
+ASPETTO E PERSONALIZZAZIONE
+- Nuova icona applicazione (barre colore).
+- Tema chiaro/scuro selezionabile da Impostazioni, con salvataggio
+  della preferenza.
+- Finestra Impostazioni riorganizzata a schede (Aspetto, Avvio, Valori
+  predefiniti, Salvataggio).
+- Tipografia uniformata in tutte le finestre dell'applicazione.
+- Monitor/colonne/righe attivi ora evidenziati nel menu Display, con
+  persistenza corretta al riavvio dell'applicazione.
+
+FINESTRA INFORMAZIONI (ABOUT)
+- Rimosse righe duplicate (Sviluppato da / Licenza).
+- Corretto allineamento di tutti i campi (Sviluppato da, Licenza,
+  Versione, Sito web, GitHub) su un'unica colonna.
+
+DISTRIBUZIONE
+- Aggiunto script di build/packaging automatizzato e installer Windows
+  (Inno Setup), con eseguibile self-contained: non richiede .NET
+  preinstallato sulla macchina di destinazione.

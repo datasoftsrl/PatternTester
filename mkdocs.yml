@@ -1,0 +1,99 @@
+site_name: PatternTester
+site_description: Professional Monitor Test Pattern Generator
+site_author: DataSoft Srl
+
+docs_dir: docs
+
+theme:
+  name: material
+  language: en
+
+  logo: assets/images/logo.png
+  favicon: assets/images/favicon.png
+
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - navigation.instant
+    - navigation.indexes
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+
+  palette:
+    - scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+
+    - scheme: slate
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji
+
+extra_css:
+  - assets/css/extra.css
+
+extra:
+  generator: false
+
+copyright: |
+  © DataSoft Srl
+
+nav:
+  - Home: index.md
+
+  - User Guide:
+      - Overview: user.md
+      - Introduction: user/introduction.md
+      - Installation: user/installation.md
+      - First Start: user/first-start.md
+
+  - Developer Guide:
+      - developer.md
+
+  - Architecture:
+      - architecture.md
+
+  - Platforms:
+      - Windows: windows.md
+      - Linux: linux.md
+
+  - Patterns:
+      - patterns.md
+
+  - API:
+      - api.md
+
+  - FAQ:
+      - faq.md
+
+  - Changelog:
+      - changelog.md

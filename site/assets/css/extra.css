@@ -1,0 +1,22 @@
+.md-typeset h1{
+    font-size:2.6rem;
+    font-weight:700;
+}
+
+.md-typeset h2{
+    margin-top:2.5rem;
+}
+
+.hero-buttons{
+    margin-top:1.5rem;
+    margin-bottom:2rem;
+}
+
+.hero-buttons .md-button{
+    margin-right:.5rem;
+    margin-bottom:.5rem;
+}
+
+.grid.cards{
+    margin-top:2rem;
+}

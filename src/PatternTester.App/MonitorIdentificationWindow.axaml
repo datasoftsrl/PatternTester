@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PatternTester.App.MonitorIdentificationWindow"
+        x:CompileBindings="False"
+        WindowStartupLocation="Manual"
+        WindowDecorations="None"
+        ShowInTaskbar="False"
+        Topmost="True"
+        Background="Black"
+        CanResize="False">
+
+        <Grid>
+                <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="20">
+
+                        <TextBlock
+                        Text="{Binding Title}"
+                        HorizontalAlignment="Center"
+                        Foreground="White"
+                        FontSize="120"
+                        FontWeight="Bold"/>
+
+                        <TextBlock
+                        Text="{Binding Details}"
+                        HorizontalAlignment="Center"
+                        Foreground="White"
+                        FontSize="42"/>
+
+                </StackPanel>
+        </Grid>
+</Window>

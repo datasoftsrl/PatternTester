@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pattern Tester — Guida</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f4f4f4;
+    --panel: #ffffff;
+    --text: #222;
+    --muted: #666;
+    --border: #d5d5d5;
+    --accent: #555;
+    --soft: #e8e8e8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.55;
+  }
+  header {
+    background: #dedede;
+    border-bottom: 1px solid #c6c6c6;
+    padding: 34px 24px 28px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 30px; }
+  header p { margin: 0; color: var(--muted); }
+  .layout {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+  }
+  nav {
+    position: sticky;
+    top: 18px;
+    align-self: start;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  nav strong { display: block; margin-bottom: 8px; }
+  nav a {
+    display: block;
+    padding: 6px 8px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  nav a:hover { background: var(--soft); }
+  main {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+  }
+  section { margin-bottom: 34px; }
+  h2 {
+    font-size: 22px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 7px;
+  }
+  h3 { font-size: 17px; margin-top: 22px; }
+  code, kbd {
+    background: #eeeeee;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-family: Consolas, monospace;
+  }
+  .note {
+    background: #eeeeee;
+    border-left: 4px solid #888;
+    padding: 12px 14px;
+    margin: 14px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 18px;
+  }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid var(--border);
+    padding: 9px 10px;
+  }
+  th { background: var(--soft); }
+  .pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .pattern {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: #fafafa;
+  }
+  footer {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0 24px 28px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    nav { position: static; }
+    .pattern-grid { grid-template-columns: 1fr; }
+    main { padding: 20px; }
+  }
+  @media print {
+    body { background: white; }
+    nav { display: none; }
+    .layout { display: block; max-width: none; }
+    main { border: 0; padding: 0; }
+    header { border: 0; }
+    footer { max-width: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div style="max-width:1050px;margin:auto;">
+    <h1>Pattern Tester — Guida</h1>
+    <p>Manuale rapido per configurare display, pattern e modalità di visualizzazione.</p>
+  </div>
+</header>
+
+<div class="layout">
+  <nav>
+    <strong>Indice</strong>
+    <a href="#introduzione">Introduzione</a>
+    <a href="#file">File</a>
+    <a href="#display">Display</a>
+    <a href="#pattern">Pattern</a>
+    <a href="#visualizza">Visualizza</a>
+    <a href="#impostazioni">Impostazioni</a>
+    <a href="#pattern-settings">Parametri pattern</a>
+    <a href="#aiuto">Aiuto</a>
+  </nav>
+
+  <main>
+    <section id="introduzione">
+      <h2>Introduzione</h2>
+      <p>
+        <strong>Pattern Tester</strong> è un'applicazione per visualizzare e configurare
+        pattern di test destinati a uno o più monitor. La finestra principale raccoglie
+        i comandi nei menu e mostra, quando disponibile, l'area di configurazione del
+        pattern selezionato.
+      </p>
+      <div class="note">
+        Questa guida descrive le funzioni attualmente presenti nell'interfaccia.
+        I nomi dei comandi seguono quelli visualizzati nei menu dell'applicazione.
+      </div>
+    </section>
+
+    <section id="file">
+      <h2>Menu File</h2>
+      <table>
+        <tr><th>Comando</th><th>Funzione</th></tr>
+        <tr><td><strong>Salva</strong></td><td>Salva la configurazione corrente secondo le impostazioni di salvataggio.</td></tr>
+        <tr><td><strong>Impostazioni...</strong></td><td>Apre la finestra delle impostazioni predefinite dell'applicazione.</td></tr>
+        <tr><td><strong>Esci</strong></td><td>Chiude l'applicazione.</td></tr>
+      </table>
+    </section>
+
+    <section id="display">
+      <h2>Menu Display</h2>
+      <h3>Monitor</h3>
+      <p>
+        Permette di scegliere il monitor di destinazione. La selezione del monitor
+        viene mantenuta nella configurazione.
+      </p>
+
+      <h3>Colonne</h3>
+      <p>
+        Definisce il numero di colonne utilizzate nella disposizione dei display.
+        La selezione avviene tramite i valori disponibili nel menu.
+      </p>
+
+      <h3>Righe</h3>
+      <p>
+        Definisce il numero di righe utilizzate nella disposizione dei display.
+      </p>
+
+      <div class="note">
+        Righe e colonne determinano la disposizione della configurazione multi-monitor.
+        I valori selezionati vengono applicati alla visualizzazione del pattern.
+      </div>
+    </section>
+
+    <section id="pattern">
+      <h2>Menu Pattern</h2>
+      <p>
+        Dal menu <strong>Pattern</strong> è possibile scegliere il tipo di test da visualizzare.
+      </p>
+
+      <div class="pattern-grid">
+        <div class="pattern"><strong>Geometry</strong><br>Pattern geometrico con linee e opzioni geometriche.</div>
+        <div class="pattern"><strong>Single Color</strong><br>Visualizzazione uniforme di un singolo colore.</div>
+        <div class="pattern"><strong>Gray</strong><br>Pattern in scala di grigi con regolazione del livello.</div>
+        <div class="pattern"><strong>Gamma</strong><br>Pattern a scacchiera utilizzato per la verifica della risposta gamma.</div>
+        <div class="pattern"><strong>Bars</strong><br>Pattern a barre per controlli visivi sul display.</div>
+        <div class="pattern"><strong>Color Bars</strong><br>Barre colorate per la verifica della resa cromatica.</div>
+        <div class="pattern"><strong>Gradient to Black</strong><br>Gradiente verso il nero.</div>
+        <div class="pattern"><strong>Two Colors Gradient</strong><br>Gradiente tra due colori.</div>
+        <div class="pattern"><strong>Chessboard</strong><br>Pattern a scacchiera.</div>
+        <div class="pattern"><strong>Phase</strong><br>Pattern destinato alla verifica della fase.</div>
+        <div class="pattern"><strong>Color Temperature</strong><br>Pattern per la verifica della temperatura colore.</div>
+      </div>
+
+      <div class="note">
+        Selezionando un pattern, l'area di configurazione della finestra principale
+        si adatta automaticamente ai parametri disponibili per quel pattern.
+      </div>
+    </section>
+
+    <section id="visualizza">
+      <h2>Menu Visualizza</h2>
+      <h3>Mostra Pattern</h3>
+      <p>
+        Attiva o disattiva la visualizzazione del pattern sul display.
+      </p>
+
+      <h3>Mostra informazioni monitor</h3>
+      <p>
+        Mostra le informazioni relative al monitor. La finestra delle informazioni
+        può essere portata in primo piano per una consultazione immediata.
+      </p>
+
+      <h3>Identifica monitor</h3>
+      <p>
+        Mostra brevemente, a schermo intero su ogni monitor collegato, un'etichetta
+        con il numero del monitor, la risoluzione e (su Windows) la frequenza di
+        aggiornamento — utile per capire subito quale schermo fisico corrisponde
+        a quale numero nel menu <strong>Display → Monitor</strong>.
+      </p>
+    </section>
+
+    <section id="impostazioni">
+      <h2>Impostazioni</h2>
+      <p>
+        La finestra <strong>Impostazioni</strong> permette di definire i valori
+        predefiniti utilizzati dall'applicazione.
+      </p>
+
+      <h3>Aspetto</h3>
+      <ul>
+        <li><strong>Tema scuro</strong> / <strong>Tema chiaro</strong>: scelta del tema dell'interfaccia. Il cambio si applica immediatamente e viene ricordato al riavvio.</li>
+      </ul>
+
+      <h3>Avvio</h3>
+      <ul>
+        <li><strong>Ultima configurazione</strong>: utilizza la configurazione precedente.</li>
+        <li><strong>Valori predefiniti</strong>: utilizza i valori configurati nelle impostazioni.</li>
+        <li><strong>Mostra automaticamente il pattern all'avvio</strong>: visualizza automaticamente il pattern all'avvio.</li>
+      </ul>
+
+      <h3>Valori predefiniti</h3>
+      <ul>
+        <li><strong>Pattern</strong>: pattern iniziale.</li>
+        <li><strong>Monitor</strong>: monitor predefinito.</li>
+        <li><strong>Colonne</strong>: numero di colonne predefinito.</li>
+        <li><strong>Righe</strong>: numero di righe predefinito.</li>
+      </ul>
+
+      <h3>Salvataggio</h3>
+      <ul>
+        <li><strong>Alla chiusura</strong></li>
+        <li><strong>Ad ogni modifica</strong></li>
+        <li><strong>Solo manualmente con Salva</strong></li>
+      </ul>
+    </section>
+
+    <section id="pattern-settings">
+      <h2>Configurazione dei pattern</h2>
+
+      <h3>Geometry</h3>
+      <ul>
+        <li><strong>Lines</strong>: numero di linee del pattern.</li>
+        <li><strong>Diagonal lines</strong>: abilita le linee diagonali.</li>
+        <li><strong>Circle</strong>: abilita il cerchio.</li>
+      </ul>
+
+      <h3>Single Color</h3>
+      <p>
+        Permette di scegliere un colore preimpostato tra quelli disponibili,
+        come nero, bianco, rosso, verde, blu, magenta, giallo e ciano.
+      </p>
+
+      <h3>Gray</h3>
+      <p>
+        Il parametro <strong>White %</strong> controlla il livello di bianco
+        del pattern in percentuale.
+      </p>
+
+      <h3>Gamma</h3>
+      <ul>
+        <li><strong>Gamma</strong>: valore gamma regolabile.</li>
+        <li><strong>Dimensione scacchiera</strong>: numero di celle per lato.</li>
+      </ul>
+
+      <div class="note">
+        I parametri specifici degli altri pattern vengono mostrati nell'area
+        di configurazione della finestra principale quando il relativo pattern
+        viene selezionato.
+      </div>
+    </section>
+
+    <section id="aiuto">
+      <h2>Menu Aiuto</h2>
+      <table>
+        <tr><th>Comando</th><th>Funzione</th></tr>
+        <tr><td><strong>Guida</strong></td><td>Apre questa documentazione.</td></tr>
+        <tr><td><strong>Informazioni</strong></td><td>Visualizza le informazioni sull'applicazione.</td></tr>
+      </table>
+    </section>
+  </main>
+</div>
+
+<footer>
+  Pattern Tester — Guida utente. Documento esterno in formato HTML.
+</footer>
+</body>
+</html>
