@@ -24,6 +24,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MinVer" Version="7.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <ProjectReference Include="../PatternTester.Core/PatternTester.Core.csproj" />
     <ProjectReference Include="../PatternTester.Rendering/PatternTester.Rendering.csproj" />
     <ProjectReference Include="../PatternTester.Infrastructure/PatternTester.Infrastructure.csproj" />
