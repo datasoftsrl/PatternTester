@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Text.Json;
 using Avalonia;
 using PatternTester.App.ViewModels;
+using PatternTester.Infrastructure;
 
 namespace PatternTester.App.Services;
 
@@ -91,8 +92,8 @@ public sealed class LocalizationService
             try
             {
                 var json = File.ReadAllText(file);
-                var data = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-                if (data is null)
+                var data = JsonSerializer.Deserialize(json, ConfigurationJsonContext.Default.DictionaryStringString);
+		if (data is null)
                     continue;
 
                 var code = data.TryGetValue("_code", out var codeValue) && !string.IsNullOrWhiteSpace(codeValue)

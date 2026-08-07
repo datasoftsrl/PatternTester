@@ -9,8 +9,8 @@ namespace PatternTester.App;
 
 public partial class PatternWindow : Window
 {
-    private readonly MainWindowViewModel _viewModel;
-    private readonly MainWindow _mainWindow;
+    private readonly MainWindowViewModel? _viewModel;
+    private readonly MainWindow? _mainWindow;
     
     public PatternWindow()
 	{

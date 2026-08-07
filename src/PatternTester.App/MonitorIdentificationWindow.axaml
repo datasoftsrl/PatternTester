@@ -1,7 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:PatternTester.App"
         x:Class="PatternTester.App.MonitorIdentificationWindow"
-        x:CompileBindings="False"
+        x:DataType="local:MonitorIdentificationWindow+MonitorIdentificationViewModel"
+        x:CompileBindings="True"
         WindowStartupLocation="Manual"
         WindowDecorations="None"
         ShowInTaskbar="False"
@@ -16,14 +18,14 @@
                         Spacing="20">
 
                         <TextBlock
-                        Text="{Binding Title}"
+                        Text="{CompiledBinding Title}"
                         HorizontalAlignment="Center"
                         Foreground="White"
                         FontSize="120"
                         FontWeight="Bold"/>
 
                         <TextBlock
-                        Text="{Binding Details}"
+                        Text="{CompiledBinding Details}"
                         HorizontalAlignment="Center"
                         Foreground="White"
                         FontSize="42"/>

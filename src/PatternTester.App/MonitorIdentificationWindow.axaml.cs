@@ -22,7 +22,7 @@ public partial class MonitorIdentificationWindow : Window
         DataContext = "MONITOR";
     }
 
-    private sealed class MonitorIdentificationViewModel
+    public sealed class MonitorIdentificationViewModel
     {
         public string Title { get; init; } = "";
         public string Details { get; init; } = "";

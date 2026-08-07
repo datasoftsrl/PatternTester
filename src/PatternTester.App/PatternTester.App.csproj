@@ -11,16 +11,20 @@
     <FileVersion>1.0.0.0</FileVersion>
     <InformationalVersion>1.0.0</InformationalVersion>
 
-    <!-- Applica app.manifest solo in build Windows: su Linux/macOS
-         l'attributo <ApplicationManifest> viene ignorato dal toolchain,
-         quindi non serve una condizione OS esplicita. -->
+    <!-- Applica app.manifest solo in build Windows -->
     <ApplicationManifest>app.manifest</ApplicationManifest>
 
-    <!-- Icona dell'eseguibile su Windows (.exe, barra delle applicazioni,
-         Esplora risorse). Su Linux/macOS questa proprieta' viene ignorata
-         dal toolchain: l'icona in-app (titlebar/dock) e' gestita invece
-         da Window.Icon nell'XAML, vedi MainWindow.axaml/PatternWindow.axaml. -->
+    <!-- Icona dell'eseguibile -->
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+
+    <!-- OTTIMIZZAZIONI PER NATIVE AOT & AVVIO ISTANTANEO (<50ms) -->
+    <PublishAot>true</PublishAot>
+    <StripSymbols>true</StripSymbols>
+    <OptimizationPreference>Speed</OptimizationPreference>
+    <EventSourceSupport>false</EventSourceSupport>
+    <HttpActivityPropagationSupport>false</HttpActivityPropagationSupport>
+    <MetadataUpdaterSupport>false</MetadataUpdaterSupport>
+    <UseSystemResourceKeys>true</UseSystemResourceKeys>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,16 +38,9 @@
     <PackageReference Include="Avalonia.Desktop" Version="12.1.0" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.0" />
     <Content Include="Assets\**">
-	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
 
-    <!-- Necessario in aggiunta al Content sopra: permette di referenziare
-         l'icona da XAML con "avares://PatternTester.App/Assets/..."
-         (usato per l'icona di titlebar/taskbar delle finestre, cross-platform).
-         Il PNG e' usato per l'icona in-app (il decoder immagini di Avalonia
-         gestisce meglio il PNG rispetto all'ICO multi-risoluzione); l'ICO
-         resta comunque necessario per ApplicationIcon (icona dell'exe
-         su Windows, gestita dal toolchain nativo, non da Avalonia). -->
     <AvaloniaResource Include="Assets\icon.ico" />
     <AvaloniaResource Include="Assets\icon.png" />
   </ItemGroup>
