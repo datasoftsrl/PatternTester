@@ -103,6 +103,9 @@
 
 						<CheckBox Content="{DynamicResource Settings.AutoShowPattern}"
 								  IsChecked="{Binding Settings.AutoShowPattern}" />
+
+						<CheckBox Content="{DynamicResource Settings.WarnOnMonitorScaling}"
+								  IsChecked="{Binding Settings.WarnOnMonitorScaling}" />
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

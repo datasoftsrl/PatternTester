@@ -15,6 +15,12 @@ public sealed class ApplicationSettings
     // Mostra automaticamente il pattern all'avvio
     public bool AutoShowPattern { get; set; } = false;
 
+    // Avvisa all'avvio se un monitor ha lo scaling del display sopra il
+    // 100% (vedi ScalingWarningWindow / MainWindow.CheckMonitorScalingAsync).
+    // L'utente puo' disattivarlo dalla checkbox "Non mostrare più" nella
+    // finestra di avviso stessa, oppure da qui in Impostazioni.
+    public bool WarnOnMonitorScaling { get; set; } = true;
+
     // "on_exit" = salva alla chiusura
     // "on_change" = salva ad ogni modifica
     // "manual" = salva solo con il pulsante Salva

@@ -1,0 +1,372 @@
+diff --git a/src/PatternTester.App/Languages/en.json b/src/PatternTester.App/Languages/en.json
+index 4ff7f76..fceee64 100644
+--- a/src/PatternTester.App/Languages/en.json
++++ b/src/PatternTester.App/Languages/en.json
+@@ -37,6 +37,7 @@
+   "Settings.UseLastConfiguration": "Last configuration",
+   "Settings.UseDefaults": "Default values",
+   "Settings.AutoShowPattern": "Automatically show the pattern at startup",
++  "Settings.WarnOnMonitorScaling": "Warn if a monitor has scaling above 100%",
+   "Settings.DefaultValues": "Default values",
+   "Settings.Pattern": "Pattern",
+   "Settings.Language": "Language",
+@@ -113,6 +114,13 @@
+   "About.Copyright": "© 2026 DataSoft Srl",
+   "About.Version": "Version:",
+   "App.Title": "Pattern Tester",
++  "ScalingWarning.Title": "Monitor scaling is not 100%",
++  "ScalingWarning.Message": "One or more connected monitors have display scaling set above 100%:",
++  "ScalingWarning.Suggestion": "For accurate colorimetric and geometric verification, set scaling to 100% in your operating system's display settings before continuing. Otherwise the pattern may not match the monitor's exact physical resolution.",
++  "ScalingWarning.Continue": "Continue anyway",
++  "ScalingWarning.Exit": "Exit",
++  "ScalingWarning.MonitorLabel": "Monitor",
++  "ScalingWarning.DontShowAgain": "Don't show this warning again",
+   "Language.It": "Italiano",
+   "Language.En": "English",
+   "_code": "en",
+diff --git a/src/PatternTester.App/Languages/it.json b/src/PatternTester.App/Languages/it.json
+index 6406eb2..35ed0ec 100644
+--- a/src/PatternTester.App/Languages/it.json
++++ b/src/PatternTester.App/Languages/it.json
+@@ -44,6 +44,7 @@
+ "Settings.UseLastConfiguration": "Ultima configurazione",
+ "Settings.UseDefaults": "Valori predefiniti",
+ "Settings.AutoShowPattern": "Mostra automaticamente il pattern all'avvio",
++"Settings.WarnOnMonitorScaling": "Avvisa se un monitor ha lo scaling sopra il 100%",
+ 
+ "Settings.DefaultValues": "Valori predefiniti",
+ "Settings.Pattern": "Pattern",
+@@ -138,6 +139,14 @@
+ "About.Version": "Versione:",
+ "App.Title": "Pattern Tester",
+ 
++"ScalingWarning.Title": "Scaling del monitor non al 100%",
++"ScalingWarning.Message": "Uno o più monitor collegati hanno lo scaling del display impostato sopra il 100%:",
++"ScalingWarning.Suggestion": "Per garantire una verifica colorimetrica e geometrica corretta, impostare lo scaling al 100% nelle impostazioni del sistema operativo prima di procedere. In caso contrario il pattern potrebbe non corrispondere esattamente alla risoluzione fisica del monitor.",
++"ScalingWarning.Continue": "Continua comunque",
++"ScalingWarning.Exit": "Esci",
++"ScalingWarning.MonitorLabel": "Monitor",
++"ScalingWarning.DontShowAgain": "Non mostrare più questo avviso",
++
+ "Language.It": "Italiano",
+ "Language.En": "English",
+ 
+diff --git a/src/PatternTester.App/MainWindow.axaml.cs b/src/PatternTester.App/MainWindow.axaml.cs
+index 1a66dc1..6a26b76 100644
+--- a/src/PatternTester.App/MainWindow.axaml.cs
++++ b/src/PatternTester.App/MainWindow.axaml.cs
+@@ -8,6 +8,7 @@ using System.Diagnostics;
+ using System.Runtime.InteropServices;
+ using System.Text.RegularExpressions;
+ using System.IO;
++using System.Linq;
+ using System.Threading.Tasks;
+ 
+ namespace PatternTester.App;
+@@ -421,14 +422,74 @@ public partial class MainWindow : Window
+ 			: result.Trim();
+ 	}
+ 
+-		private void OnOpened(object? sender, EventArgs e)
++		private async void OnOpened(object? sender, EventArgs e)
+ 		{
+ 			RefreshMonitorListAndPlacement();
+ 
++			await CheckMonitorScalingAsync();
++
+ 			if (ViewModel.Settings.AutoShowPattern)
+ 				ViewModel.TestMode = true;
+ 		}
+ 
++		/// <summary>
++		/// PatternTester needs the pattern's pixels to match the monitor's
++		/// physical pixels 1:1 for colorimetric/geometric verification to
++		/// be meaningful. OS-level display scaling above 100% breaks that
++		/// mapping (see installer/KNOWN_ISSUES.txt item 1) — on some
++		/// setups, especially with mixed scaling across multiple monitors,
++		/// this can make the pattern not match the real resolution of the
++		/// target display. Rather than silently producing a possibly wrong
++		/// pattern, warn the user at startup and let them decide whether to
++		/// continue anyway or quit and fix the scaling first.
++		/// </summary>
++		private async Task CheckMonitorScalingAsync()
++		{
++			// L'utente puo' disattivare l'avviso in modo permanente, sia
++			// dalla checkbox "Non mostrare più" nella dialog stessa, sia
++			// da Impostazioni → Avvio: in entrambi i casi il valore finisce
++			// nello stesso ApplicationSettings.WarnOnMonitorScaling, quindi
++			// qui basta controllarlo una volta sola.
++			if (!ViewModel.Settings.WarnOnMonitorScaling)
++				return;
++
++			var offending = Screens.All
++				.Select((screen, index) => (screen, number: index + 1))
++				.Where(x => x.screen.Scaling > 1.0)
++				.Select(x => $"{ViewModel.Localization.Translate("ScalingWarning.MonitorLabel")} {x.number} — {x.screen.Scaling:P0}")
++				.ToList();
++
++			if (offending.Count == 0)
++				return;
++
++			var dialog = new ScalingWarningWindow(offending, ViewModel.Localization);
++			await dialog.ShowDialog(this);
++
++			if (dialog.DontShowAgainRequested)
++			{
++				// Persistita subito, indipendentemente dalla modalita' di
++				// salvataggio scelta dall'utente (on_exit/on_change/manual):
++				// e' una preferenza esplicita data in risposta a un avviso,
++				// non va persa se l'app si chiude in modo anomalo prima del
++				// prossimo salvataggio automatico.
++				ViewModel.Settings.WarnOnMonitorScaling = false;
++				ViewModel.Save();
++			}
++
++			if (!dialog.ContinueRequested)
++			{
++				if (Avalonia.Application.Current?.ApplicationLifetime
++					is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime lifetime)
++				{
++					lifetime.Shutdown();
++				}
++				else
++				{
++					Environment.Exit(0);
++				}
++			}
++		}
++
+     private void RefreshMonitorListAndPlacement()
+     {
+         var screens = Screens;
+diff --git a/src/PatternTester.App/ScalingWarningWindow.axaml b/src/PatternTester.App/ScalingWarningWindow.axaml
+new file mode 100644
+index 0000000..f228e09
+--- /dev/null
++++ b/src/PatternTester.App/ScalingWarningWindow.axaml
+@@ -0,0 +1,67 @@
++<Window xmlns="https://github.com/avaloniaui"
++        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
++        xmlns:local="using:PatternTester.App"
++        x:Class="PatternTester.App.ScalingWarningWindow"
++        x:DataType="local:ScalingWarningWindow+ScalingWarningViewModel"
++        Title="{Binding Title}"
++        Icon="avares://PatternTester.App/Assets/icon.png"
++        Width="480"
++        MinWidth="480"
++        SizeToContent="Height"
++        CanResize="False"
++        WindowStartupLocation="CenterScreen"
++        Topmost="True">
++
++    <Border Padding="20">
++
++        <StackPanel Spacing="14">
++
++            <TextBlock Text="{Binding Title}"
++                       FontSize="17"
++                       FontWeight="Bold"/>
++
++            <TextBlock Text="{Binding Message}"
++                       TextWrapping="Wrap"/>
++
++            <Border Background="#22FF9800"
++                    CornerRadius="4"
++                    Padding="10">
++                <TextBlock Text="{Binding MonitorList}"
++                           TextWrapping="Wrap"
++                           FontFamily="Consolas,Menlo,monospace"/>
++            </Border>
++
++            <TextBlock Text="{Binding Suggestion}"
++                       TextWrapping="Wrap"
++                       Opacity="0.85"/>
++
++            <CheckBox x:Name="DontShowAgainCheckBox"
++                      Content="{Binding DontShowAgainText}"
++                      Margin="0,4,0,0"/>
++
++            <StackPanel Orientation="Horizontal"
++                        HorizontalAlignment="Right"
++                        Spacing="10"
++                        Margin="0,8,0,0">
++
++                <Button Content="{Binding ExitText}"
++                        Width="120"
++                        Height="34"
++                        HorizontalContentAlignment="Center"
++                        VerticalContentAlignment="Center"
++                        Click="ExitClick"/>
++
++                <Button Content="{Binding ContinueText}"
++                        Width="150"
++                        Height="34"
++                        HorizontalContentAlignment="Center"
++                        VerticalContentAlignment="Center"
++                        Click="ContinueClick"/>
++
++            </StackPanel>
++
++        </StackPanel>
++
++    </Border>
++
++</Window>
+diff --git a/src/PatternTester.App/ScalingWarningWindow.axaml.cs b/src/PatternTester.App/ScalingWarningWindow.axaml.cs
+new file mode 100644
+index 0000000..35509cb
+--- /dev/null
++++ b/src/PatternTester.App/ScalingWarningWindow.axaml.cs
+@@ -0,0 +1,92 @@
++using Avalonia.Controls;
++using Avalonia.Interactivity;
++using PatternTester.App.Services;
++
++namespace PatternTester.App;
++
++/// <summary>
++/// Modal warning shown at startup when one or more connected monitors
++/// report a display scaling above 100%. PatternTester needs 1 pattern
++/// pixel = 1 physical monitor pixel for colorimetric/geometric
++/// verification to be meaningful; OS-level scaling above 100% breaks
++/// that 1:1 mapping (see PatternWindow/MonitorIdentificationWindow
++/// comments and installer/KNOWN_ISSUES.txt item 1 for the technical
++/// background). Rather than silently producing a pattern that doesn't
++/// match the monitor's real resolution, this dialog stops the user and
++/// makes the choice explicit: fix the scaling and relaunch, or
++/// acknowledge the risk and continue anyway.
++///
++/// Includes a "don't show again" checkbox (persisted by the caller into
++/// ApplicationSettings.WarnOnMonitorScaling, also reachable later from
++/// Settings → Avvio) but deliberately no attempt to change the OS
++/// scaling automatically — there is no safe cross-platform way to do
++/// that from here.
++/// </summary>
++public partial class ScalingWarningWindow : Window
++{
++    public ScalingWarningWindow()
++    {
++        InitializeComponent();
++    }
++
++    /// <param name="offendingMonitors">
++    /// One line per affected monitor, e.g. "Monitor 2 — 150%". Already
++    /// formatted by the caller (MainWindow), which is the one that
++    /// knows the monitor numbering shown elsewhere in the UI.
++    /// </param>
++    public ScalingWarningWindow(
++        IReadOnlyList<string> offendingMonitors,
++        LocalizationService localization)
++    {
++        InitializeComponent();
++
++        DataContext = new ScalingWarningViewModel
++        {
++            Title = localization.Translate("ScalingWarning.Title"),
++            Message = localization.Translate("ScalingWarning.Message"),
++            MonitorList = string.Join(Environment.NewLine, offendingMonitors),
++            Suggestion = localization.Translate("ScalingWarning.Suggestion"),
++            ContinueText = localization.Translate("ScalingWarning.Continue"),
++            ExitText = localization.Translate("ScalingWarning.Exit"),
++            DontShowAgainText = localization.Translate("ScalingWarning.DontShowAgain")
++        };
++    }
++
++    /// <summary>
++    /// True if the user chose to continue despite the scaling warning,
++    /// false if they chose to exit the application. Read by the caller
++    /// after ShowDialog completes.
++    /// </summary>
++    public bool ContinueRequested { get; private set; }
++
++    /// <summary>
++    /// True if the "don't show again" checkbox was ticked, regardless of
++    /// whether the user then chose Continue or Exit — the preference is
++    /// about future launches, not about the current one. The caller is
++    /// responsible for persisting this into ApplicationSettings.
++    /// </summary>
++    public bool DontShowAgainRequested => DontShowAgainCheckBox.IsChecked == true;
++
++    private void ContinueClick(object? sender, RoutedEventArgs e)
++    {
++        ContinueRequested = true;
++        Close();
++    }
++
++    private void ExitClick(object? sender, RoutedEventArgs e)
++    {
++        ContinueRequested = false;
++        Close();
++    }
++
++    public sealed class ScalingWarningViewModel
++    {
++        public string Title { get; init; } = "";
++        public string Message { get; init; } = "";
++        public string MonitorList { get; init; } = "";
++        public string Suggestion { get; init; } = "";
++        public string ContinueText { get; init; } = "";
++        public string ExitText { get; init; } = "";
++        public string DontShowAgainText { get; init; } = "";
++    }
++}
+diff --git a/src/PatternTester.App/SettingsWindow.axaml b/src/PatternTester.App/SettingsWindow.axaml
+index 262463a..3530fee 100644
+--- a/src/PatternTester.App/SettingsWindow.axaml
++++ b/src/PatternTester.App/SettingsWindow.axaml
+@@ -103,6 +103,9 @@
+ 
+ 						<CheckBox Content="{DynamicResource Settings.AutoShowPattern}"
+ 								  IsChecked="{Binding Settings.AutoShowPattern}" />
++
++						<CheckBox Content="{DynamicResource Settings.WarnOnMonitorScaling}"
++								  IsChecked="{Binding Settings.WarnOnMonitorScaling}" />
+                     </StackPanel>
+                 </ScrollViewer>
+             </TabItem>
+diff --git a/src/PatternTester.Infrastructure/ApplicationSettings.cs b/src/PatternTester.Infrastructure/ApplicationSettings.cs
+index e6ec3f1..ac8aa30 100644
+--- a/src/PatternTester.Infrastructure/ApplicationSettings.cs
++++ b/src/PatternTester.Infrastructure/ApplicationSettings.cs
+@@ -15,6 +15,12 @@ public sealed class ApplicationSettings
+     // Mostra automaticamente il pattern all'avvio
+     public bool AutoShowPattern { get; set; } = false;
+ 
++    // Avvisa all'avvio se un monitor ha lo scaling del display sopra il
++    // 100% (vedi ScalingWarningWindow / MainWindow.CheckMonitorScalingAsync).
++    // L'utente puo' disattivarlo dalla checkbox "Non mostrare più" nella
++    // finestra di avviso stessa, oppure da qui in Impostazioni.
++    public bool WarnOnMonitorScaling { get; set; } = true;
++
+     // "on_exit" = salva alla chiusura
+     // "on_change" = salva ad ogni modifica
+     // "manual" = salva solo con il pulsante Salva
+diff --git a/src/PatternTester.Infrastructure/ConfigurationService.cs b/src/PatternTester.Infrastructure/ConfigurationService.cs
+index d7fe78c..f46baee 100644
+--- a/src/PatternTester.Infrastructure/ConfigurationService.cs
++++ b/src/PatternTester.Infrastructure/ConfigurationService.cs
+@@ -40,6 +40,7 @@ public sealed class ConfigurationService
+                 settings.LanguageCode = string.IsNullOrWhiteSpace(data.Settings.LanguageCode) ? "it" : data.Settings.LanguageCode;
+                 settings.AutoShowPattern = data.Settings.AutoShowPattern;
+                 settings.SaveMode = data.Settings.SaveMode;
++                settings.WarnOnMonitorScaling = data.Settings.WarnOnMonitorScaling;
+ 
+                 settings.DefaultPatternIndex = Math.Clamp(
+                     data.Settings.DefaultPatternIndex, 0, 10);
+@@ -96,6 +97,7 @@ public sealed class ConfigurationService
+                 LanguageCode = settings.LanguageCode,
+                 AutoShowPattern = settings.AutoShowPattern,
+                 SaveMode = settings.SaveMode,
++                WarnOnMonitorScaling = settings.WarnOnMonitorScaling,
+                 DefaultPatternIndex = settings.DefaultPatternIndex,
+                 DefaultMonitor = settings.DefaultMonitor,
+                 DefaultHorizontalScreens = settings.DefaultHorizontalScreens,
+@@ -241,7 +243,7 @@ public sealed class ConfigurationData
+         public SettingsData? Settings { get; set; }
+     }
+ 
+-    public sealed class SettingsData { public string StartupMode { get; set; } = "last"; public string Theme { get; set; } = "dark"; public string LanguageCode { get; set; } = "it"; public bool AutoShowPattern { get; set; } = false; public string SaveMode { get; set; } = "on_exit"; public int DefaultPatternIndex { get; set; } = 0; public int DefaultMonitor { get; set; } = 1; public int DefaultHorizontalScreens { get; set; } = 3; public int DefaultVerticalScreens { get; set; } = 3; }
++    public sealed class SettingsData { public string StartupMode { get; set; } = "last"; public string Theme { get; set; } = "dark"; public string LanguageCode { get; set; } = "it"; public bool AutoShowPattern { get; set; } = false; public string SaveMode { get; set; } = "on_exit"; public bool WarnOnMonitorScaling { get; set; } = true; public int DefaultPatternIndex { get; set; } = 0; public int DefaultMonitor { get; set; } = 1; public int DefaultHorizontalScreens { get; set; } = 3; public int DefaultVerticalScreens { get; set; } = 3; }
+     public sealed class DisplayData { public int TargetMonitor { get; set; } = 1; public int HorizontalScreens { get; set; } = 3; public int VerticalScreens { get; set; } = 3; public int MaxScreens { get; set; } = 40; }
+     public sealed class GeometryData { public int Lines { get; set; } = 10; public bool Diagonal { get; set; } = false; public bool Circle { get; set; } = false; public int MaxLines { get; set; } = 16; }
+     public sealed class SingleColorData { public string Color { get; set; } = "black"; }

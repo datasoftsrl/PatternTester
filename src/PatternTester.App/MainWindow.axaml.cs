@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PatternTester.App;
@@ -421,12 +422,72 @@ public partial class MainWindow : Window
 			: result.Trim();
 	}
 
-		private void OnOpened(object? sender, EventArgs e)
+		private async void OnOpened(object? sender, EventArgs e)
 		{
 			RefreshMonitorListAndPlacement();
 
+			await CheckMonitorScalingAsync();
+
 			if (ViewModel.Settings.AutoShowPattern)
 				ViewModel.TestMode = true;
+		}
+
+		/// <summary>
+		/// PatternTester needs the pattern's pixels to match the monitor's
+		/// physical pixels 1:1 for colorimetric/geometric verification to
+		/// be meaningful. OS-level display scaling above 100% breaks that
+		/// mapping (see installer/KNOWN_ISSUES.txt item 1) — on some
+		/// setups, especially with mixed scaling across multiple monitors,
+		/// this can make the pattern not match the real resolution of the
+		/// target display. Rather than silently producing a possibly wrong
+		/// pattern, warn the user at startup and let them decide whether to
+		/// continue anyway or quit and fix the scaling first.
+		/// </summary>
+		private async Task CheckMonitorScalingAsync()
+		{
+			// L'utente puo' disattivare l'avviso in modo permanente, sia
+			// dalla checkbox "Non mostrare più" nella dialog stessa, sia
+			// da Impostazioni → Avvio: in entrambi i casi il valore finisce
+			// nello stesso ApplicationSettings.WarnOnMonitorScaling, quindi
+			// qui basta controllarlo una volta sola.
+			if (!ViewModel.Settings.WarnOnMonitorScaling)
+				return;
+
+			var offending = Screens.All
+				.Select((screen, index) => (screen, number: index + 1))
+				.Where(x => x.screen.Scaling > 1.0)
+				.Select(x => $"{ViewModel.Localization.Translate("ScalingWarning.MonitorLabel")} {x.number} — {x.screen.Scaling:P0}")
+				.ToList();
+
+			if (offending.Count == 0)
+				return;
+
+			var dialog = new ScalingWarningWindow(offending, ViewModel.Localization);
+			await dialog.ShowDialog(this);
+
+			if (dialog.DontShowAgainRequested)
+			{
+				// Persistita subito, indipendentemente dalla modalita' di
+				// salvataggio scelta dall'utente (on_exit/on_change/manual):
+				// e' una preferenza esplicita data in risposta a un avviso,
+				// non va persa se l'app si chiude in modo anomalo prima del
+				// prossimo salvataggio automatico.
+				ViewModel.Settings.WarnOnMonitorScaling = false;
+				ViewModel.Save();
+			}
+
+			if (!dialog.ContinueRequested)
+			{
+				if (Avalonia.Application.Current?.ApplicationLifetime
+					is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime lifetime)
+				{
+					lifetime.Shutdown();
+				}
+				else
+				{
+					Environment.Exit(0);
+				}
+			}
 		}
 
     private void RefreshMonitorListAndPlacement()

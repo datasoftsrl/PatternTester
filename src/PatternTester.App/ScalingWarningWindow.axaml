@@ -1,0 +1,67 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:PatternTester.App"
+        x:Class="PatternTester.App.ScalingWarningWindow"
+        x:DataType="local:ScalingWarningWindow+ScalingWarningViewModel"
+        Title="{Binding Title}"
+        Icon="avares://PatternTester.App/Assets/icon.png"
+        Width="480"
+        MinWidth="480"
+        SizeToContent="Height"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True">
+
+    <Border Padding="20">
+
+        <StackPanel Spacing="14">
+
+            <TextBlock Text="{Binding Title}"
+                       FontSize="17"
+                       FontWeight="Bold"/>
+
+            <TextBlock Text="{Binding Message}"
+                       TextWrapping="Wrap"/>
+
+            <Border Background="#22FF9800"
+                    CornerRadius="4"
+                    Padding="10">
+                <TextBlock Text="{Binding MonitorList}"
+                           TextWrapping="Wrap"
+                           FontFamily="Consolas,Menlo,monospace"/>
+            </Border>
+
+            <TextBlock Text="{Binding Suggestion}"
+                       TextWrapping="Wrap"
+                       Opacity="0.85"/>
+
+            <CheckBox x:Name="DontShowAgainCheckBox"
+                      Content="{Binding DontShowAgainText}"
+                      Margin="0,4,0,0"/>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Spacing="10"
+                        Margin="0,8,0,0">
+
+                <Button Content="{Binding ExitText}"
+                        Width="120"
+                        Height="34"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Click="ExitClick"/>
+
+                <Button Content="{Binding ContinueText}"
+                        Width="150"
+                        Height="34"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Click="ContinueClick"/>
+
+            </StackPanel>
+
+        </StackPanel>
+
+    </Border>
+
+</Window>

@@ -44,6 +44,7 @@
 "Settings.UseLastConfiguration": "Ultima configurazione",
 "Settings.UseDefaults": "Valori predefiniti",
 "Settings.AutoShowPattern": "Mostra automaticamente il pattern all'avvio",
+"Settings.WarnOnMonitorScaling": "Avvisa se un monitor ha lo scaling sopra il 100%",
 
 "Settings.DefaultValues": "Valori predefiniti",
 "Settings.Pattern": "Pattern",
@@ -137,6 +138,14 @@
 "About.Copyright": "© 2026 DataSoft Srl",
 "About.Version": "Versione:",
 "App.Title": "Pattern Tester",
+
+"ScalingWarning.Title": "Scaling del monitor non al 100%",
+"ScalingWarning.Message": "Uno o più monitor collegati hanno lo scaling del display impostato sopra il 100%:",
+"ScalingWarning.Suggestion": "Per garantire una verifica colorimetrica e geometrica corretta, impostare lo scaling al 100% nelle impostazioni del sistema operativo prima di procedere. In caso contrario il pattern potrebbe non corrispondere esattamente alla risoluzione fisica del monitor.",
+"ScalingWarning.Continue": "Continua comunque",
+"ScalingWarning.Exit": "Esci",
+"ScalingWarning.MonitorLabel": "Monitor",
+"ScalingWarning.DontShowAgain": "Non mostrare più questo avviso",
 
 "Language.It": "Italiano",
 "Language.En": "English",
