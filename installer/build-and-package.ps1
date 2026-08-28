@@ -13,10 +13,21 @@
 
     Parametri opzionali:
         .\build-and-package.ps1 -Version "1.1.0" -SkipInstaller
+
+    NOTA SUL VERSIONAMENTO: il progetto usa MinVer, che calcola
+    automaticamente la versione dai tag Git (vedi docs/developer.md,
+    sezione "Versioning"). Il modo corretto per pubblicare una nuova
+    versione e' creare un tag Git (es. "git tag v1.1.0") PRIMA di
+    lanciare questo script, senza passare -Version: MinVer trovera' il
+    tag da solo. Il parametro -Version qui sopra e' un override
+    manuale (via MinVerVersionOverride) da usare solo per build locali
+    "usa e getta" senza creare un tag, o quando lo script gira in una
+    cartella che non e' un repository Git valido (MinVer altrimenti
+    userebbe il suo fallback "0.0.0-alpha.0").
 #>
 
 param(
-    [string]$Version = "1.0.0",
+    [string]$Version = "",
     [switch]$SkipInstaller
 )
 
@@ -37,14 +48,25 @@ if (Test-Path $PublishDir) { Remove-Item $PublishDir -Recurse -Force }
 dotnet clean $ProjectPath -c Release | Out-Null
 
 Write-Host "=== 2. Publish self-contained (win-x64, single file) ===" -ForegroundColor Cyan
-dotnet publish $ProjectPath `
-    -c Release `
-    -r win-x64 `
-    --self-contained true `
-    -p:PublishSingleFile=true `
-    -p:IncludeNativeLibrariesForSelfExtract=true `
-    -p:Version=$Version `
-    -o $PublishDir
+
+$publishArgs = @(
+    "-c", "Release",
+    "-r", "win-x64",
+    "--self-contained", "true",
+    "-p:PublishSingleFile=true",
+    "-p:IncludeNativeLibrariesForSelfExtract=true",
+    "-o", $PublishDir
+)
+
+# -Version e' un override manuale (bypassa i tag Git tramite
+# MinVerVersionOverride). Se non specificato, MinVer calcola la
+# versione da solo a partire dal tag Git piu' recente — vedi
+# docs/developer.md, sezione "Versioning".
+if ($Version) {
+    $publishArgs += "-p:MinVerVersionOverride=$Version"
+}
+
+dotnet publish $ProjectPath @publishArgs
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Publish fallito, controlla gli errori sopra." -ForegroundColor Red
@@ -58,6 +80,18 @@ if (-not (Test-Path $ExePath)) {
 }
 
 Write-Host "Eseguibile creato: $ExePath" -ForegroundColor Green
+
+# La versione "vera" e' quella che MinVer ha effettivamente scritto
+# nell'eseguibile (da tag Git, oppure dall'eventuale -Version passato
+# sopra) — la leggiamo da li' invece di ripetere la logica di
+# risoluzione qui, cosi' l'installer riporta sempre lo stesso numero
+# che compare in Informazioni su PatternTester dentro l'app.
+$ResolvedVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($ExePath).FileVersion
+if (-not $ResolvedVersion) {
+    Write-Host "ATTENZIONE: impossibile leggere la versione da $ExePath, uso 0.0.0" -ForegroundColor Yellow
+    $ResolvedVersion = "0.0.0"
+}
+Write-Host "Versione risolta: $ResolvedVersion" -ForegroundColor Green
 
 if ($SkipInstaller) {
     Write-Host "Installer saltato (-SkipInstaller). Fine." -ForegroundColor Yellow
@@ -106,7 +140,7 @@ Write-Host "=== 4. Generazione installer ===" -ForegroundColor Cyan
 if (-not (Test-Path $OutputDir)) { New-Item -ItemType Directory -Path $OutputDir | Out-Null }
 
 & $IsccPath `
-    "/DMyAppVersion=$Version" `
+    "/DMyAppVersion=$ResolvedVersion" `
     $IssFile
 
 if ($LASTEXITCODE -ne 0) {
@@ -117,7 +151,7 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host ""
 Write-Host "=== Completato ===" -ForegroundColor Green
 Write-Host "Eseguibile standalone : $ExePath"
-Write-Host "Installer distribuibile: $OutputDir\PatternTester-Setup-$Version.exe"
+Write-Host "Installer distribuibile: $OutputDir\PatternTester-Setup-$ResolvedVersion.exe"
 Write-Host ""
-Write-Host "Copia il file 'PatternTester-Setup-$Version.exe' sulla nuova macchina ed eseguilo:"
+Write-Host "Copia il file 'PatternTester-Setup-$ResolvedVersion.exe' sulla nuova macchina ed eseguilo:"
 Write-Host "non serve installare .NET, e' tutto incluso (self-contained)."

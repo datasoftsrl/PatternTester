@@ -480,6 +480,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -541,7 +547,91 @@
   <span class="md-ellipsis">
     
   
-    User Guide
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/first-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Start
   
 
     
@@ -732,6 +822,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -748,6 +856,91 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#project-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterntestercore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PatternTester.Core
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterntesterrendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PatternTester.Rendering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterntesterinfrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PatternTester.Infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterntesterapp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PatternTester.App
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1276,6 +1469,80 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#project-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterntestercore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PatternTester.Core
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterntesterrendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PatternTester.Rendering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterntesterinfrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PatternTester.Infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterntesterapp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PatternTester.App
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1292,80 +1559,39 @@
 
 
 <h1 id="software-architecture">Software Architecture<a class="headerlink" href="#software-architecture" title="Permanent link">&para;</a></h1>
-<p>PatternTester follows a layered architecture.</p>
-<p>The primary objective is long-term maintainability.</p>
+<p>PatternTester is split into four .NET projects, each with a single, narrow responsibility. This page gives the high-level picture; see the <a href="../developer/">Developer Guide</a> for file-by-file detail and the reasoning behind specific design decisions (theming, DPI handling, configuration persistence).</p>
 <hr />
-<h1 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h1>
-<div class="highlight"><pre><span></span><code>UI
-↓
-
-ViewModels
-
-↓
-
-Application Services
-
-↓
-
-Rendering Engine
-
-↓
-
-Platform Services
-
-↓
-
-Operating System
+<h2 id="project-overview">Project Overview<a class="headerlink" href="#project-overview" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>PatternTester.Core            → what a pattern IS (no UI, no platform code)
+        ↓
+PatternTester.Rendering       → turns a pattern into pixels (Avalonia canvas)
+        ↓
+PatternTester.App             → windows, menus, view models, platform services
+        ↑
+PatternTester.Infrastructure  → reads/writes the JSON settings file
 </code></pre></div>
+<p><code>Infrastructure</code> is consumed by <code>App</code> directly (it has no dependency of its own on <code>Core</code> or <code>Rendering</code>); the arrow above reflects data flow, not a compile-time dependency chain.</p>
 <hr />
-<h1 id="layers">Layers<a class="headerlink" href="#layers" title="Permanent link">&para;</a></h1>
-<h2 id="ui">UI<a class="headerlink" href="#ui" title="Permanent link">&para;</a></h2>
-<p>Avalonia user interface.</p>
-<p>Responsibilities:</p>
+<h2 id="patterntestercore"><code>PatternTester.Core</code><a class="headerlink" href="#patterntestercore" title="Permanent link">&para;</a></h2>
+<p>Defines <code>PatternBase</code> (the abstract class every pattern derives from) and the 11 concrete pattern classes, plus <code>PatternCatalog</code>, the ordered list of all built-in patterns. Has no dependency on Avalonia or any UI framework, so it is unit-testable in isolation — see <code>tests/PatternTester.Core.Tests</code>. Full public surface documented in the <a href="../api/">API Reference</a>.</p>
+<h2 id="patterntesterrendering"><code>PatternTester.Rendering</code><a class="headerlink" href="#patterntesterrendering" title="Permanent link">&para;</a></h2>
+<p><code>PatternCanvas</code>, the Avalonia control that hosts a <code>PatternBase</code> and calls its <code>Render</code> method once per grid cell, handling the column/row layout (see <a href="../user/#columns-and-rows-split-screen-patterns">Display → Columns/Rows</a>) and the optional cell border. This is the one place where "what a pattern draws" (<code>Core</code>) meets an actual UI framework.</p>
+<h2 id="patterntesterinfrastructure"><code>PatternTester.Infrastructure</code><a class="headerlink" href="#patterntesterinfrastructure" title="Permanent link">&para;</a></h2>
+<p><code>ConfigurationService</code>, <code>ApplicationSettings</code> and <code>DisplaySettings</code>: reading and writing the single per-user JSON configuration file (<code>%APPDATA%\PatternTester\patterntester.json</code> on Windows, <code>~/.config/PatternTester/patterntester.json</code> on Linux). No UI or pattern-rendering knowledge — just persistence.</p>
+<h2 id="patterntesterapp"><code>PatternTester.App</code><a class="headerlink" href="#patterntesterapp" title="Permanent link">&para;</a></h2>
+<p>The Avalonia application itself:</p>
 <ul>
-<li>windows</li>
-<li>dialogs</li>
-<li>user interaction</li>
+<li><strong>Windows</strong> (<code>MainWindow</code>, <code>PatternWindow</code>, <code>SettingsWindow</code>, <code>MonitorInfoWindow</code>, <code>MonitorIdentificationWindow</code>, <code>AboutWindow</code>) — one <code>.axaml</code>/<code>.axaml.cs</code> pair per window, each fairly self-contained.</li>
+<li><strong><code>ViewModels/</code></strong> — primarily <code>MainWindowViewModel</code>, which owns the current pattern/monitor/layout selection, the loaded <code>ApplicationSettings</code>/<code>DisplaySettings</code>, and exposes them as bindable properties for the main window and the settings dialog.</li>
+<li><strong><code>Services/</code></strong> — platform-specific functionality that doesn't belong in <code>Core</code> or <code>Infrastructure</code>: <code>WindowsMonitorInfoService</code> and <code>LinuxMonitorInfoService</code> (populate Info Monitor), <code>Win32WindowPlacement</code> (native fallback for positioning the fullscreen pattern window on Windows), <code>LocalizationService</code> (loads <code>Languages/*.json</code>).</li>
+<li><strong><code>Styles/Theme.axaml</code></strong> — shared design tokens (accent color, card style, base font size, light/dark-specific colors), merged after Avalonia's own <code>FluentTheme</code> so it can override the defaults without needing custom control templates.</li>
 </ul>
 <hr />
-<h2 id="viewmodels">ViewModels<a class="headerlink" href="#viewmodels" title="Permanent link">&para;</a></h2>
-<p>Business logic exposed to the user interface.</p>
-<p>Responsibilities:</p>
+<h2 id="design-goals">Design Goals<a class="headerlink" href="#design-goals" title="Permanent link">&para;</a></h2>
 <ul>
-<li>state management</li>
-<li>commands</li>
-<li>data binding</li>
-</ul>
-<hr />
-<h2 id="application-services">Application Services<a class="headerlink" href="#application-services" title="Permanent link">&para;</a></h2>
-<p>High-level services.</p>
-<p>Examples:</p>
-<ul>
-<li>monitor management</li>
-<li>language management</li>
-<li>configuration</li>
-</ul>
-<hr />
-<h2 id="rendering">Rendering<a class="headerlink" href="#rendering" title="Permanent link">&para;</a></h2>
-<p>Responsible for generating all test patterns.</p>
-<p>The rendering engine is isolated from the UI.</p>
-<hr />
-<h2 id="platform-layer">Platform Layer<a class="headerlink" href="#platform-layer" title="Permanent link">&para;</a></h2>
-<p>Platform-specific functionality.</p>
-<p>Examples:</p>
-<ul>
-<li>Windows monitor information</li>
-<li>Linux monitor information</li>
-<li>refresh rate detection</li>
-</ul>
-<hr />
-<h1 id="design-goals">Design Goals<a class="headerlink" href="#design-goals" title="Permanent link">&para;</a></h1>
-<ul>
-<li>modularity</li>
-<li>testability</li>
-<li>separation of concerns</li>
-<li>platform independence</li>
-<li>maintainability</li>
+<li><strong>Platform independence where it doesn't cost accuracy</strong> — <code>Core</code> and <code>Rendering</code> are fully cross-platform; platform-specific code is isolated behind small, single-purpose services in <code>App/Services</code>, each with its own Windows or Linux implementation rather than a leaky shared abstraction.</li>
+<li><strong>Testability</strong> — <code>Core</code> has no external dependencies, which is what makes <code>PatternTester.Core.Tests</code> possible without mocking a UI or a filesystem.</li>
+<li><strong>Fail soft, not hard</strong> — platform services return a placeholder value (<code>"N/D"</code>/<code>"N/A"</code>) for data they can't read rather than throwing, so a missing Win32 API or an unusual Linux driver never crashes a window.</li>
 </ul>
 
 

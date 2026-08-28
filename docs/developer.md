@@ -116,6 +116,46 @@ On Windows, `PatternWindow` also re-applies its position/size through `Win32Wind
 
 ---
 
+# Versioning
+
+PatternTester uses [MinVer](https://github.com/adamralph/minver) to compute the assembly version automatically from Git tags at build time — there is deliberately no version number hardcoded anywhere that needs to be bumped by hand for a release.
+
+## How it works
+
+- MinVer runs `git describe` during the build and derives the version from the closest reachable tag.
+- Tag format: `v<major>.<minor>.<patch>` (e.g. `v1.0.0`) — the leading `v` is MinVer's default expected prefix.
+- On the exact tagged commit, the version is just `1.0.0`.
+- On any commit *after* a tag (no new tag yet), MinVer produces a prerelease version that encodes how far ahead you are, e.g. `1.0.1-alpha.0.4` for 4 commits past `v1.0.0` — useful for distinguishing dev builds from each other, no action needed.
+- `About` in the running app reads this from `Assembly.GetExecutingAssembly().GetName().Version`, which MinVer sets at build time (along with `AssemblyVersion`/`FileVersion`/`InformationalVersion`) — so the version shown there always reflects what MinVer actually computed, not any `<Version>` written in the `.csproj`.
+
+## Two things MinVer needs to work at all
+
+1. **A real Git working directory.** The build must run from an actual `git clone`, with the `.git` folder present — not from a downloaded ZIP or a copy of the `src/` folder without its Git metadata. If MinVer can't find a `.git` directory it silently falls back to `0.0.0-alpha.0` and prints a `MINVER1001` warning (easy to miss in a long build log — if `About` ever shows `0.0.0`, check for this warning first).
+2. **At least one tag reachable from the commit being built.** With zero tags anywhere in history, MinVer also falls back to `0.0.0-alpha.0`, tag or no tag issue aside.
+
+## Releasing a new version
+
+```bash
+git tag v1.1.0
+git push origin v1.1.0
+```
+
+Then build/publish normally (see below) — no other step is required, MinVer picks the new tag up automatically. Do **not** also edit a `<Version>` property anywhere to "match" the tag; there should only be one source of truth (the tag itself).
+
+## Overriding the version without tagging
+
+For a one-off local build, or a CI job that doesn't want to create a tag, MinVer supports an explicit override that bypasses Git entirely:
+
+```bash
+dotnet publish ... -p:MinVerVersionOverride=1.2.3
+```
+
+`installer/build-and-package.ps1` exposes this as its own `-Version` parameter (`.\build-and-package.ps1 -Version "1.2.3"`); when omitted, the script lets MinVer resolve the version from tags as usual, then reads the *actual* resulting version back off the published `.exe` (via `FileVersionInfo`) to name the installer and pass it to Inno Setup — so the installer filename and the in-app `About` version can never disagree.
+
+**Do not** rely on plain `-p:Version=...` to override MinVer — it looks like it should work, but MinVer recalculates and overwrites `Version` later in the build regardless of what was passed in, so a plain `-p:Version=` override is silently discarded. `MinVerVersionOverride` is the property MinVer actually respects.
+
+---
+
 # Building
 
 ```bash

@@ -480,6 +480,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -541,7 +547,91 @@
   <span class="md-ellipsis">
     
   
-    User Guide
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/first-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Start
   
 
     
@@ -827,6 +917,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -843,6 +951,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#supported-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported Versions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitor-detection-and-dpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitor Detection and DPI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitor-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitor Identification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#info-monitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Info Monitor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1276,6 +1458,69 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#supported-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported Versions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitor-detection-and-dpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitor Detection and DPI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitor-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitor Identification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#info-monitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Info Monitor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1292,60 +1537,30 @@
 
 
 <h1 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h1>
-<p>This section describes Windows-specific information.</p>
+<p>Windows-specific notes for PatternTester.</p>
 <hr />
-<h1 id="supported-versions">Supported Versions<a class="headerlink" href="#supported-versions" title="Permanent link">&para;</a></h1>
-<p>PatternTester supports:</p>
-<ul>
-<li>Windows 10</li>
-<li>Windows 11</li>
-</ul>
-<p>Both x64 and ARM64 are planned.</p>
+<h2 id="supported-versions">Supported Versions<a class="headerlink" href="#supported-versions" title="Permanent link">&para;</a></h2>
+<p>PatternTester targets Windows 10 and Windows 11, x64. It ships as a self-contained executable (the .NET runtime is bundled), so no separate runtime installation is needed.</p>
 <hr />
-<h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
-<ul>
-<li>.NET Runtime</li>
-<li>DirectX compatible graphics driver</li>
-<li>Multi-monitor support (recommended)</li>
-</ul>
+<h2 id="monitor-detection-and-dpi">Monitor Detection and DPI<a class="headerlink" href="#monitor-detection-and-dpi" title="Permanent link">&para;</a></h2>
+<p>PatternTester detects every connected display automatically, including its resolution, position and per-monitor scaling percentage. The application manifest declares Per-Monitor-V2 DPI awareness, which Windows requires in order to report accurate, independent scaling for each monitor — without it, monitors with different scaling percentages (e.g. one at 100% and another at 125%) would not be handled correctly.</p>
+<p>Fullscreen patterns always render at the target monitor's native resolution, regardless of its scaling percentage.</p>
 <hr />
-<h1 id="monitor-detection">Monitor Detection<a class="headerlink" href="#monitor-detection" title="Permanent link">&para;</a></h1>
-<p>PatternTester retrieves:</p>
-<ul>
-<li>monitor name</li>
-<li>native resolution</li>
-<li>refresh rate</li>
-<li>monitor order</li>
-</ul>
-<p>The application automatically detects all connected displays.</p>
-<hr />
-<h1 id="monitor-identification">Monitor Identification<a class="headerlink" href="#monitor-identification" title="Permanent link">&para;</a></h1>
-<p>The <strong>Identify Monitors</strong> function displays a temporary fullscreen window on each monitor.</p>
-<p>Displayed information includes:</p>
-<ul>
-<li>monitor number</li>
-<li>native resolution</li>
-<li>refresh rate (Windows)</li>
-</ul>
-<p>Example:</p>
-<div class="highlight"><pre><span></span><code>Monitor 2
-
-2560 × 1440 @ 144 Hz
+<h2 id="monitor-identification">Monitor Identification<a class="headerlink" href="#monitor-identification" title="Permanent link">&para;</a></h2>
+<p><strong>View → Identify Monitors</strong> briefly shows a fullscreen overlay on every connected display with its number and resolution, plus refresh rate on Windows. Example:</p>
+<div class="highlight"><pre><span></span><code>MONITOR 2
+2560x1440@144
 </code></pre></div>
 <hr />
-<h1 id="dpi-awareness">DPI Awareness<a class="headerlink" href="#dpi-awareness" title="Permanent link">&para;</a></h1>
-<p>PatternTester is High-DPI aware.</p>
-<p>Recommended Windows scaling:</p>
-<ul>
-<li>100%</li>
-<li>125%</li>
-<li>150%</li>
-</ul>
-<p>Fullscreen rendering always uses the monitor native resolution.</p>
+<h2 id="info-monitor">Info Monitor<a class="headerlink" href="#info-monitor" title="Permanent link">&para;</a></h2>
+<p>On Windows, the <strong>Info Monitor</strong> panel reads resolution, refresh rate, physical size and color depth directly via the Win32 display APIs — no external tools required. Per-channel color depth (bits per channel) is not available through these APIs without parsing the monitor's raw EDID data, which PatternTester does not currently do; that field shows "N/A".</p>
 <hr />
-<h1 id="known-limitations">Known Limitations<a class="headerlink" href="#known-limitations" title="Permanent link">&para;</a></h1>
-<p>Some USB display adapters may report incomplete monitor information.</p>
-<p>Refresh rate detection depends on the graphics driver.</p>
+<h2 id="known-limitations">Known Limitations<a class="headerlink" href="#known-limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Refresh-rate and physical-size lookup relies on matching the display device name Avalonia reports for each screen against Windows' own naming; in rare non-standard multi-adapter configurations this match can fail, in which case the affected fields fall back to "N/A" rather than showing an incorrect value.</li>
+<li>Some USB or virtual display adapters may report incomplete monitor information to Windows itself, independent of PatternTester.</li>
+</ul>
+<p>See also: <a href="../user/installation/#windows">Installing on Windows</a>, <a href="../developer/#building-the-windows-installer">Building the installer</a>.</p>
 
 
 

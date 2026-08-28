@@ -37,7 +37,6 @@ Organized by category — every linked page exists and can be read today, indepe
 [Aspect Ratio](patterns/aspect-ratio.md) ·
 [Overscan](patterns/overscan.md) ·
 [Grid Alignment](patterns/grid-alignment.md) ·
-[Convergence](patterns/convergence.md) ·
 [Pixel Mapping](patterns/pixel-mapping.md) ·
 [Dot Pitch](patterns/dot-pitch.md)
 

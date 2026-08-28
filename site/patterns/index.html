@@ -480,6 +480,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -541,7 +547,91 @@
   <span class="md-ellipsis">
     
   
-    User Guide
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user/first-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Start
   
 
     
@@ -948,6 +1038,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pattern Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -964,6 +1072,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#available-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-library-not-all-implemented-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference Library (not all implemented yet)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation Format
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1276,6 +1436,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#available-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-library-not-all-implemented-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference Library (not all implemented yet)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentation Format
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1292,56 +1493,127 @@
 
 
 <h1 id="pattern-reference">Pattern Reference<a class="headerlink" href="#pattern-reference" title="Permanent link">&para;</a></h1>
-<p>The Pattern Reference explains the purpose and correct use of every test pattern available in PatternTester.</p>
-<p>Unlike many pattern generators, PatternTester aims to document not only <strong>what</strong> a pattern displays, but also <strong>why</strong> it exists and <strong>how</strong> it should be interpreted.</p>
+<p>This section explains the purpose and correct use of each test pattern, aiming to document not just <strong>what</strong> a pattern displays, but <strong>why</strong> it exists and <strong>how</strong> to interpret it.</p>
+<div class="admonition info">
+<p class="admonition-title">Two kinds of pages here</p>
+<p>PatternTester currently implements <strong>11 patterns</strong>, listed under <a href="#available-patterns">Available Patterns</a> below — each links to its real page. The rest of this section is a broader <strong>display-testing reference library</strong>: pages about topics PatternTester does not generate a dedicated pattern for yet (contrast, uniformity, HDR, color gamuts, motion, and so on). They are kept because the background knowledge is useful on its own, and because they double as a roadmap for patterns that could be added later — but don't expect the corresponding menu entry to exist today.</p>
+</div>
 <hr />
-<h1 id="pattern-categories">Pattern Categories<a class="headerlink" href="#pattern-categories" title="Permanent link">&para;</a></h1>
-<p>Current categories include:</p>
-<ul>
-<li>Geometry</li>
-<li>Grayscale</li>
-<li>Gamma</li>
-<li>Sharpness</li>
-<li>Focus</li>
-<li>Color</li>
-<li>Uniformity</li>
-<li>Pixel Mapping</li>
-<li>Alignment</li>
-<li>Gradients</li>
-</ul>
-<p>Additional categories will be added in future releases.</p>
+<h2 id="available-patterns">Available Patterns<a class="headerlink" href="#available-patterns" title="Permanent link">&para;</a></h2>
+<p>These correspond 1:1 to the entries in the <strong>Pattern</strong> menu, in the same order:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Page</th>
+<th>What it checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geometry</td>
+<td><a href="geometry/">geometry.md</a></td>
+<td>Straight lines, proportions, overscan, centering</td>
+</tr>
+<tr>
+<td>Single Color</td>
+<td><a href="single-color/">single-color.md</a></td>
+<td>Flat-field uniformity, dead/stuck pixels</td>
+</tr>
+<tr>
+<td>Gray</td>
+<td><a href="grayscale/">grayscale.md</a></td>
+<td>Gray level / white percentage rendering</td>
+</tr>
+<tr>
+<td>Gamma</td>
+<td><a href="gamma/">gamma.md</a></td>
+<td>Gamma response via a checkerboard at an adjustable value</td>
+</tr>
+<tr>
+<td>Bars</td>
+<td><a href="bars/">bars.md</a></td>
+<td>Quick brightness step-separation check in a chosen color</td>
+</tr>
+<tr>
+<td>Color Bars</td>
+<td><a href="color-bars/">color-bars.md</a></td>
+<td>Color reproduction accuracy</td>
+</tr>
+<tr>
+<td>Gradient to Black</td>
+<td><a href="gradients/">gradients.md</a></td>
+<td>Banding/smoothness of a gradient fading to black</td>
+</tr>
+<tr>
+<td>Two-Color Gradient</td>
+<td><a href="gradients/">gradients.md</a></td>
+<td>Banding/smoothness of a gradient between two colors</td>
+</tr>
+<tr>
+<td>Chessboard</td>
+<td><a href="checkerboard/">checkerboard.md</a></td>
+<td>Grid uniformity, also used as the base for the Gamma pattern</td>
+</tr>
+<tr>
+<td>Phase</td>
+<td><a href="phase/">phase.md</a></td>
+<td>Pixel-level sampling/scaling fidelity, phase/timing artifacts</td>
+</tr>
+<tr>
+<td>Color Temperature</td>
+<td><a href="color-temperature/">color-temperature.md</a></td>
+<td>White point / color temperature</td>
+</tr>
+</tbody>
+</table>
+<p>For the configurable parameters of each pattern (e.g. gamma value, grid size, gradient direction), see the <a href="../user/">User Guide</a>.</p>
 <hr />
-<h1 id="pattern-documentation-structure">Pattern Documentation Structure<a class="headerlink" href="#pattern-documentation-structure" title="Permanent link">&para;</a></h1>
-<p>Each pattern follows the same documentation format.</p>
-<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
-<p>Why the pattern exists.</p>
-<h2 id="theory">Theory<a class="headerlink" href="#theory" title="Permanent link">&para;</a></h2>
-<p>The technical principles behind the test.</p>
-<h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">&para;</a></h2>
-<p>How to perform the evaluation.</p>
-<h2 id="expected-result">Expected Result<a class="headerlink" href="#expected-result" title="Permanent link">&para;</a></h2>
-<p>What a correctly functioning display should show.</p>
-<h2 id="common-problems">Common Problems<a class="headerlink" href="#common-problems" title="Permanent link">&para;</a></h2>
-<p>Typical defects revealed by the pattern.</p>
-<h2 id="professional-notes">Professional Notes<a class="headerlink" href="#professional-notes" title="Permanent link">&para;</a></h2>
-<p>Additional information useful for technicians.</p>
+<h2 id="reference-library-not-all-implemented-yet">Reference Library (not all implemented yet)<a class="headerlink" href="#reference-library-not-all-implemented-yet" title="Permanent link">&para;</a></h2>
+<p>Organized by category — every linked page exists and can be read today, independently of whether PatternTester has a matching menu entry.</p>
+<p><strong>Geometry &amp; Alignment</strong>
+<a href="aspect-ratio/">Aspect Ratio</a> ·
+<a href="overscan/">Overscan</a> ·
+<a href="grid-alignment/">Grid Alignment</a> ·
+<a href="pixel-mapping/">Pixel Mapping</a> ·
+<a href="dot-pitch/">Dot Pitch</a></p>
+<p><strong>Sharpness &amp; Focus</strong>
+<a href="sharpness/">Sharpness</a> ·
+<a href="focus/">Focus</a> ·
+<a href="siemens-star/">Siemens Star</a> ·
+<a href="crosshatch/">Crosshatch</a> ·
+<a href="moire/">Moiré</a> ·
+<a href="zone-plate/">Zone Plate</a></p>
+<p><strong>Contrast &amp; Levels</strong>
+<a href="contrast/">Contrast</a> ·
+<a href="black-level/">Black Level</a> ·
+<a href="white-level/">White Level</a> ·
+<a href="local-dimming/">Local Dimming</a> ·
+<a href="blooming/">Blooming</a></p>
+<p><strong>Uniformity &amp; Panel Defects</strong>
+<a href="uniformity/">Uniformity</a> ·
+<a href="black-uniformity/">Black Uniformity</a> ·
+<a href="white-uniformity/">White Uniformity</a> ·
+<a href="color-uniformity/">Color Uniformity</a> ·
+<a href="backlight-bleeding/">Backlight Bleeding</a> ·
+<a href="dead-pixels/">Dead Pixels</a> ·
+<a href="viewing-angle/">Viewing Angle</a></p>
+<p><strong>Color &amp; Gamuts</strong>
+<a href="srgb/">sRGB</a> ·
+<a href="adobe-rgb/">Adobe RGB</a> ·
+<a href="dci-p3/">DCI-P3</a> ·
+<a href="rec709/">Rec.709</a> ·
+<a href="rec2020/">Rec.2020</a> ·
+<a href="hdr/">HDR</a> ·
+<a href="chroma-resolution/">Chroma Resolution</a> ·
+<a href="cross-color/">Cross-Color</a></p>
+<p><strong>Motion</strong>
+<a href="response-time/">Response Time</a> ·
+<a href="ghosting/">Ghosting</a> ·
+<a href="motion-resolution/">Motion Resolution</a></p>
 <hr />
-<h1 id="future-pattern-library">Future Pattern Library<a class="headerlink" href="#future-pattern-library" title="Permanent link">&para;</a></h1>
-<p>Each pattern will receive its own dedicated page.</p>
-<p>Example:</p>
-<ul>
-<li>Gray Ramp</li>
-<li>Gamma</li>
-<li>Geometry Grid</li>
-<li>Pixel Mapping</li>
-<li>Focus</li>
-<li>Color Bars</li>
-<li>Checkerboard</li>
-<li>Uniformity</li>
-<li>Dot Pitch</li>
-<li>Moiré</li>
-</ul>
-<p>The objective is to build a complete technical reference over time.</p>
+<h2 id="documentation-format">Documentation Format<a class="headerlink" href="#documentation-format" title="Permanent link">&para;</a></h2>
+<p>Each pattern page (available or reference) aims to follow the same structure: <strong>Purpose</strong>, <strong>Theory</strong>, <strong>Procedure</strong>, <strong>Expected Result</strong>, <strong>Common Problems</strong>, <strong>Professional Notes</strong>. Not every reference-library page has all sections filled in yet — all 11 available patterns now have a dedicated page; expanding the reference library is tracked as ongoing documentation work.</p>
 
 
 
