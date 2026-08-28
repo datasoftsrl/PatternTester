@@ -123,7 +123,8 @@ PatternTester uses [MinVer](https://github.com/adamralph/minver) to compute the 
 ## How it works
 
 - MinVer runs `git describe` during the build and derives the version from the closest reachable tag.
-- Tag format: `v<major>.<minor>.<patch>` (e.g. `v1.0.0`) — the leading `v` is MinVer's default expected prefix.
+- Tag format: `v<major>.<minor>.<patch>` (e.g. `v1.0.0`).
+- **Important:** MinVer's own default tag prefix is *empty* — out of the box it only recognizes plain tags like `1.0.0`, not `v1.0.0`. Because this project's tags use the `v` prefix, the `.csproj` sets `<MinVerTagPrefix>v</MinVerTagPrefix>` explicitly. Without that line, MinVer treats every `vX.Y.Z` tag as "not a version tag", silently ignores all of them (even with tags present and Git working perfectly), and falls back to `0.0.0-alpha.0` — this is exactly what happened during initial setup, worth remembering if the version ever mysteriously resets to `0.0.0` again after touching the `.csproj`.
 - On the exact tagged commit, the version is just `1.0.0`.
 - On any commit *after* a tag (no new tag yet), MinVer produces a prerelease version that encodes how far ahead you are, e.g. `1.0.1-alpha.0.4` for 4 commits past `v1.0.0` — useful for distinguishing dev builds from each other, no action needed.
 - `About` in the running app reads this from `Assembly.GetExecutingAssembly().GetName().Version`, which MinVer sets at build time (along with `AssemblyVersion`/`FileVersion`/`InformationalVersion`) — so the version shown there always reflects what MinVer actually computed, not any `<Version>` written in the `.csproj`.

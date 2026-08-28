@@ -11,6 +11,17 @@
     <FileVersion>1.0.0.0</FileVersion>
     <InformationalVersion>1.0.0</InformationalVersion>
 
+    <!--
+      MinVer's own default tag prefix is EMPTY (it expects tags like
+      "1.0.0", not "v1.0.0"). This project's tags use the "v" prefix
+      (v1.0.0, v1.0.1, v1.0.2, ...), so MinVer must be told about it
+      explicitly here — without this, MinVer silently treats every
+      "vX.Y.Z" tag as "not a version tag", ignores all of them, and
+      falls back to 0.0.0-alpha.0 regardless of how many tags exist.
+      See docs/developer.md, section "Versioning".
+    -->
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+
     <!-- Applica app.manifest solo in build Windows -->
     <ApplicationManifest>app.manifest</ApplicationManifest>
 
