@@ -7,3 +7,4 @@ TestResults/
 *.zip
 publish/
 installer-output/
+tests/

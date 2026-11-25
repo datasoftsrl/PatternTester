@@ -42,6 +42,9 @@ public sealed class ConfigurationService
                 settings.SaveMode = data.Settings.SaveMode;
                 settings.WarnOnMonitorScaling = data.Settings.WarnOnMonitorScaling;
 
+                settings.IdentifyMonitorsDurationSeconds = Math.Clamp(
+                    data.Settings.IdentifyMonitorsDurationSeconds, 1, 60);
+
                 settings.DefaultPatternIndex = Math.Clamp(
                     data.Settings.DefaultPatternIndex, 0, 10);
 
@@ -98,6 +101,7 @@ public sealed class ConfigurationService
                 AutoShowPattern = settings.AutoShowPattern,
                 SaveMode = settings.SaveMode,
                 WarnOnMonitorScaling = settings.WarnOnMonitorScaling,
+                IdentifyMonitorsDurationSeconds = settings.IdentifyMonitorsDurationSeconds,
                 DefaultPatternIndex = settings.DefaultPatternIndex,
                 DefaultMonitor = settings.DefaultMonitor,
                 DefaultHorizontalScreens = settings.DefaultHorizontalScreens,
@@ -243,7 +247,7 @@ public sealed class ConfigurationData
         public SettingsData? Settings { get; set; }
     }
 
-    public sealed class SettingsData { public string StartupMode { get; set; } = "last"; public string Theme { get; set; } = "dark"; public string LanguageCode { get; set; } = "it"; public bool AutoShowPattern { get; set; } = false; public string SaveMode { get; set; } = "on_exit"; public bool WarnOnMonitorScaling { get; set; } = true; public int DefaultPatternIndex { get; set; } = 0; public int DefaultMonitor { get; set; } = 1; public int DefaultHorizontalScreens { get; set; } = 3; public int DefaultVerticalScreens { get; set; } = 3; }
+    public sealed class SettingsData { public string StartupMode { get; set; } = "last"; public string Theme { get; set; } = "dark"; public string LanguageCode { get; set; } = "it"; public bool AutoShowPattern { get; set; } = false; public string SaveMode { get; set; } = "on_exit"; public bool WarnOnMonitorScaling { get; set; } = true; public int IdentifyMonitorsDurationSeconds { get; set; } = 5; public int DefaultPatternIndex { get; set; } = 0; public int DefaultMonitor { get; set; } = 1; public int DefaultHorizontalScreens { get; set; } = 3; public int DefaultVerticalScreens { get; set; } = 3; }
     public sealed class DisplayData { public int TargetMonitor { get; set; } = 1; public int HorizontalScreens { get; set; } = 3; public int VerticalScreens { get; set; } = 3; public int MaxScreens { get; set; } = 40; }
     public sealed class GeometryData { public int Lines { get; set; } = 10; public bool Diagonal { get; set; } = false; public bool Circle { get; set; } = false; public int MaxLines { get; set; } = 16; }
     public sealed class SingleColorData { public string Color { get; set; } = "black"; }

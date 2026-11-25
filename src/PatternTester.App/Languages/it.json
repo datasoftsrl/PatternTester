@@ -45,6 +45,7 @@
 "Settings.UseDefaults": "Valori predefiniti",
 "Settings.AutoShowPattern": "Mostra automaticamente il pattern all'avvio",
 "Settings.WarnOnMonitorScaling": "Avvisa se un monitor ha lo scaling sopra il 100%",
+"Settings.IdentifyMonitorsDuration": "Durata overlay \"Identifica Monitor\" (secondi)",
 
 "Settings.DefaultValues": "Valori predefiniti",
 "Settings.Pattern": "Pattern",

@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Platform;
 
 namespace PatternTester.App;
@@ -54,6 +55,29 @@ public partial class MonitorIdentificationWindow : Window
             Title = $"MONITOR {monitorNumber}",
             Details = details
         };
+
+        KeyDown += OnKeyDown;
+    }
+
+    /// <summary>
+    /// Raised when the user presses ESC on this overlay, so the caller
+    /// (MainWindow.IdentifyMonitorsClick) can close every overlay early
+    /// instead of waiting out the full configured duration. Only the
+    /// overlay that currently has OS keyboard focus will actually
+    /// receive the key press — typically the last one shown/activated
+    /// — but the caller subscribes to this event on every overlay it
+    /// creates, so ESC works regardless of which one that ends up
+    /// being.
+    /// </summary>
+    public event EventHandler? EscapeRequested;
+
+    private void OnKeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.Key != Key.Escape)
+            return;
+
+        e.Handled = true;
+        EscapeRequested?.Invoke(this, EventArgs.Empty);
     }
 
     public void ShowOnScreen(Screen screen)

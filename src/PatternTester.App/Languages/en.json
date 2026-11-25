@@ -38,6 +38,7 @@
   "Settings.UseDefaults": "Default values",
   "Settings.AutoShowPattern": "Automatically show the pattern at startup",
   "Settings.WarnOnMonitorScaling": "Warn if a monitor has scaling above 100%",
+  "Settings.IdentifyMonitorsDuration": "\"Identify Monitors\" overlay duration (seconds)",
   "Settings.DefaultValues": "Default values",
   "Settings.Pattern": "Pattern",
   "Settings.Language": "Language",

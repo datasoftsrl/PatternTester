@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PatternTester.App;
@@ -73,6 +74,21 @@ public partial class MainWindow : Window
         {
             if (ViewModel.ShowMonitorInfo)
             {
+                // Richiesta esplicita: "Show Pattern" va SEMPRE disattivato
+                // quando si apre Info Monitor, sempre e comunque, non solo
+                // sospeso/nascosto "di nascosto" lasciando la voce di menu
+                // spuntata. I due tentativi precedenti (basati su
+                // _patternWindow.IsVisible, poi su un flag di sospensione
+                // separato) si sono rivelati inaffidabili su Linux/X11.
+                //
+                // Impostando direttamente TestMode = false passiamo dallo
+                // stesso percorso di codice gia' corretto e testato qui
+                // sotto (il branch TestMode), che nasconde il pattern e
+                // aggiorna anche la spunta della voce di menu "Show
+                // Pattern" nell'interfaccia, cosi' l'utente vede subito
+                // che e' stato disattivato.
+                ViewModel.TestMode = false;
+
                 ShowMonitorInfo();
             }
             else
@@ -101,6 +117,12 @@ public partial class MainWindow : Window
                     Topmost = false;
                     Topmost = true;
                 }
+
+                // Nessun ripristino automatico di "Show Pattern" alla
+                // chiusura di Info Monitor: e' stato disattivato
+                // esplicitamente sopra, e resta cosi' finche' l'utente
+                // non lo riattiva lui stesso dal menu. Niente stato
+                // nascosto da ripristinare "magicamente".
             }
 
             return;
@@ -752,20 +774,31 @@ public partial class MainWindow : Window
     {
         var screens = Screens.All;
 
-        var patternWasVisible =
-            _patternWindow is not null && _patternWindow.IsVisible;
-
-        if (_patternWindow is not null && _patternWindow.IsVisible)
-        {
-                _patternWindow.Hide();
-        }
-
         if (screens.Count == 0)
             return;
-    
-        _suspendPatternWindow = true;
+
+        // Stessa filosofia adottata per "Show Monitor Info": "Show
+        // Pattern" va SEMPRE disattivato quando si esegue Identify
+        // Monitors, non sospeso/nascosto "di nascosto" lasciando la
+        // spunta di menu attiva. L'approccio precedente (nascondere il
+        // pattern con un flag di sospensione e poi rimostrarlo in
+        // automatico alla fine, nel blocco finally) causava uno
+        // sfarfallio visibile proprio alla chiusura di Identify
+        // Monitors. Impostare direttamente TestMode = false passa dallo
+        // stesso percorso di codice gia' corretto e testato nel branch
+        // TestMode qui sopra, che nasconde il pattern e aggiorna anche
+        // la spunta "Show Pattern" nel menu.
+        ViewModel.TestMode = false;
 
         Hide();
+
+        // L'utente puo' uscire prima del tempo premendo ESC su uno
+        // qualsiasi degli overlay (vedi MonitorIdentificationWindow.
+        // EscapeRequested): questo annulla l'attesa qui sotto senza
+        // generare un'eccezione non gestita.
+        using var cts = new CancellationTokenSource();
+
+        void OnEscapeRequested(object? _, EventArgs __) => cts.Cancel();
 
         try
         {
@@ -820,15 +853,30 @@ public partial class MainWindow : Window
                     i + 1,
                     details);
 
+                window.EscapeRequested += OnEscapeRequested;
+
                 window.ShowOnScreen(screen);
 
                 windows.Add(window);
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(5));
+            var durationSeconds = Math.Max(1, ViewModel.Settings.IdentifyMonitorsDurationSeconds);
+
+            try
+            {
+                await Task.Delay(TimeSpan.FromSeconds(durationSeconds), cts.Token);
+            }
+            catch (OperationCanceledException)
+            {
+                // ESC premuto: usciamo subito, senza aspettare il resto
+                // del tempo configurato.
+            }
 
             foreach (var window in windows)
+            {
+                window.EscapeRequested -= OnEscapeRequested;
                 window.Close();
+            }
         }
         finally
         {
@@ -836,6 +884,13 @@ public partial class MainWindow : Window
 
             Topmost = true;
             Activate();
+
+            // Nessun ripristino automatico di "Show Pattern" al termine
+            // di Identify Monitors: e' stato disattivato esplicitamente
+            // sopra e resta cosi' finche' l'utente non lo riattiva lui
+            // stesso dal menu. Questo elimina anche lo sfarfallio che si
+            // vedeva prima, quando il pattern veniva rimostrato subito
+            // dopo la chiusura degli overlay di identificazione.
         }
     }
 

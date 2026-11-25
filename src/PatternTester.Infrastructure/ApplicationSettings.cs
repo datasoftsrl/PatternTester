@@ -21,6 +21,12 @@ public sealed class ApplicationSettings
     // finestra di avviso stessa, oppure da qui in Impostazioni.
     public bool WarnOnMonitorScaling { get; set; } = true;
 
+    // Durata in secondi per cui resta visibile l'overlay "MONITOR n" di
+    // View → Identify Monitors, su ciascun monitor, prima di chiudersi
+    // automaticamente (vedi MainWindow.IdentifyMonitorsClick). L'utente
+    // puo' comunque uscire prima premendo ESC.
+    public int IdentifyMonitorsDurationSeconds { get; set; } = 5;
+
     // "on_exit" = salva alla chiusura
     // "on_change" = salva ad ogni modifica
     // "manual" = salva solo con il pulsante Salva

@@ -158,13 +158,24 @@
 			<!-- VISUALIZZA -->
 			<MenuItem Header="{DynamicResource Menu.View}">
 
+				<!-- Mode=OneWay e' intenzionale: ToggleType="CheckBox" fa si'
+				     che il MenuItem inverta DA SOLO il proprio IsChecked ad
+				     ogni click, prima ancora che il nostro gestore Click
+				     venga eseguito. Con un binding TwoWay (il default per
+				     IsChecked) questo auto-toggle scriverebbe subito sulla
+				     proprieta' del ViewModel, e poi il gestore Click la
+				     inverte di nuovo: due inversioni = nessun cambiamento
+				     reale (o, nel caso di ShowMonitorInfo, la finestra si
+				     apre e si richiude nello stesso click). Con OneWay la
+				     sola fonte di verita' resta il ViewModel, aggiornato
+				     esclusivamente dai gestori Click qui sotto. -->
 				<MenuItem Header="{DynamicResource Menu.ShowPattern}"
-						  IsChecked="{Binding TestMode}"
+						  IsChecked="{Binding TestMode, Mode=OneWay}"
 						  ToggleType="CheckBox"
 						  Click="TestModeMenuClick" />
 
 				<MenuItem Header="{DynamicResource Menu.ShowMonitorInfo}"
-						  IsChecked="{Binding ShowMonitorInfo}"
+						  IsChecked="{Binding ShowMonitorInfo, Mode=OneWay}"
 						  ToggleType="CheckBox"
 						  Click="MonitorInfoMenuClick" />
 
